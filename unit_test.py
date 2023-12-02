@@ -1,7 +1,10 @@
+import json
+import tempfile
+
 import pytest
 
-from lab1 import (check_max_month, check_max_year, days_redact,
-                  months_redact, url_month_change, url_year_change)
+from lab1 import (check_max_month, check_max_year, days_redact, months_redact,
+                  read_settings_file, url_month_change, url_year_change)
 
 
 @pytest.mark.parametrize("url, expected_year", [("https://www.gismeteo.ru/diary/4618/2008/1/", 2023)])
@@ -10,7 +13,7 @@ def test_check_max_year(url, expected_year):
     assert result == expected_year
 
 
-@pytest.mark.parametrize("url, expected_month", [("https://www.gismeteo.ru/diary/4618/2008/1/", 12)])
+@pytest.mark.parametrize("url, expected_month", [("https://www.gismeteo.ru/diary/4618/2008/1/", 12), ("https://www.gismeteo.ru/diary/4618/2020/3/", 12)])
 def test_check_max_month(url, expected_month):
     result = check_max_month(url)
     assert result == expected_month
@@ -52,3 +55,18 @@ def test_days_redact(input_number, expected_output):
 def test_months_redact(input_month, expected_output):
     result = months_redact(input_month)
     assert result == expected_output
+
+
+@pytest.fixture
+def temporary_settings_file():
+    data = {"url": "https://www.gismeteo.ru/diary/4618/2008/1/",
+            "year_counter": 2008}
+    with tempfile.NamedTemporaryFile(mode="w", delete=False) as temp_file:
+        temp_file.write(json.dumps(data))
+        return temp_file.name
+
+
+def test_read_settings_file(temporary_settings_file):
+    url, year_counter = read_settings_file(temporary_settings_file)
+    assert url == "https://www.gismeteo.ru/diary/4618/2008/1/"
+    assert year_counter == 2008
