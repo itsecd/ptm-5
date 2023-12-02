@@ -92,4 +92,3 @@ def test_save_and_load_from_json(tmp_path) -> None:
 # Run tests
 if __name__ == "__main__":
     pytest.main(["-v", "–color=yes"])
-    
