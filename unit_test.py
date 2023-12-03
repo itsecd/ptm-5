@@ -15,3 +15,14 @@ import mock
 def test_mean(x, expected):
     # проверяем, что функция mean возвращает ожидаемый результат
     assert code.mean(x) == expected
+
+# параметризуем тесты для функции variance
+@pytest.mark.parametrize("x, expected", [
+    (np.array([1, 2, 3, 4, 5]), 2),
+    (np.array([-1, -2, -3, -4, -5]), 2),
+    (np.array([0]), 0),
+    (np.array([1.5, 2.5, 3.5]), 0.6666666666666666)
+])
+def test_variance(x, expected):
+    # проверяем, что функция variance возвращает ожидаемый результат
+    assert code.variance(x) == expected
