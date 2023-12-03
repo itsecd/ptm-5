@@ -3,6 +3,15 @@ import pytest
 from task import TaskList
 
 
+@pytest.fixture
+def task_list() -> TaskList:
+    """
+        функция для создания экземпляра TaskList
+        :return: TaskList
+    """
+    return TaskList()
+
+
 def test_add_task() -> None:
     """
         Тест добавления задачи в список задач.
@@ -22,7 +31,7 @@ def test_remove_task() -> None:
     assert len(task_list.tasks) == 0
 
 
-def test_complete_task() ->None:
+def test_complete_task() -> None:
     """
         Тест завершения задачи в списке задач.
     """
@@ -47,31 +56,46 @@ def test_save_and_load_from_file(tmp_path) -> None:
     assert new_task_list.tasks[0].description == "Buy groceries"
 
 
-def test_filter_tasks() -> None:
+@pytest.mark.parametrize("completed, overdue, expected_count", [
+    (True, False, 1),
+    (False, True, 0),
+    (False, False, 1)
+])
+def test_filter_tasks(completed, overdue, expected_count) -> None:
     """
-       Тест фильтрации задач в списке по завершенным задачам.
+        Тест для фильтрации задач на основе статуса завершения и просрочки.
+        :param completed: выполненные задачи
+        :param overdue: просроченные задачи
+        :param expected_count: ожидаемое значение
+
     """
     task_list = TaskList()
-    task_list.add_task("Buy groceries", priority=2)
-    task_list.add_task("Read a book")
-    task_list.add_task("Call mom", priority=3)
+    task_list.add_task("Test task 1", priority=2)
+    task_list.add_task("Test task 2")
     task_list.complete_task(0)
-    completed_tasks = task_list.filter_tasks(completed=True)
-    assert len(completed_tasks) == 1
-    assert completed_tasks[0].description == "Buy groceries"
+
+    filtered_tasks = task_list.filter_tasks(completed=completed, overdue=overdue)
+    assert len(filtered_tasks) == expected_count
 
 
-def test_filter_by_tag() -> None:
+@pytest.mark.parametrize("tag, expected_count", [
+    ("work", 2),
+    ("personal", 2),
+    ("shopping", 0)
+])
+def test_filter_by_tag(tag, expected_count) -> None:
     """
-        Тест фильтрации задач в списке по тегам.
+        Тест на фильтрацию задач по определенному тегу.
+        :param tag: тэг
+        :param expected_count: ожидаемое значение
     """
     task_list = TaskList()
-    task_list.add_task("Buy groceries", priority=2, tags=["shopping"])
-    task_list.add_task("Read a book")
-    task_list.add_task("Call mom", priority=3, tags=["family"])
-    shopping_tasks = task_list.filter_by_tag("shopping")
-    assert len(shopping_tasks) == 1
-    assert shopping_tasks[0].description == "Buy groceries"
+    task_list.add_task("Test task 1", priority=2, tags=["work"])
+    task_list.add_task("Test task 2", tags=["personal"])
+    task_list.add_task("Test task 3", tags=["work", "personal"])
+
+    filtered_tasks = task_list.filter_by_tag(tag)
+    assert len(filtered_tasks) == expected_count
 
 
 def test_save_and_load_from_json(tmp_path) -> None:
