@@ -50,3 +50,17 @@ def test_std(x, expected):
 def test_median(x, expected):
     # проверяем, что функция median возвращает ожидаемый результат
     assert code.median(x) == expected
+    
+# параметризуем тесты для функции mode
+@pytest.mark.parametrize("x, expected", [
+    (np.array([1, 2, 3, 4, 5]), np.array([1, 2, 3, 4, 5])),
+    (np.array([-1, -2, -3, -4, -5]), np.array([-1, -2, -3, -4, -5])),
+    (np.array([0]), np.array([0])),
+    (np.array([1.5, 2.5, 3.5]), np.array([1.5, 2.5, 3.5])),
+    (np.array([1, 2, 3, 4, 1]), np.array([1])),
+    (np.array([-1, -2, -3, -4, -1]), np.array([-1])),
+    (np.array([1, 2, 3, 4, 1, 2]), np.array([1, 2]))
+])
+def test_mode(x, expected):
+    # проверяем, что функция mode возвращает ожидаемый результат
+    assert np.array_equal(code.mode(x), expected)
