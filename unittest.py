@@ -144,3 +144,14 @@ def test_covariance(random_data):
     np_cov = np.cov(x, y, ddof=0)[0, 1]
     # проверяем, что оба значения совпадают с заданной точностью
     assert np.isclose(cov, np_cov)
+    
+# определяем тест для функции correlation
+def test_correlation(random_data):
+    # получаем два массива случайных данных из фикстуры
+    x, y = random_data
+    # вычисляем коэффициент корреляции с помощью функции correlation
+    corr = correlation(x, y)
+    # вычисляем коэффициент корреляции с помощью встроенной функции numpy
+    np_corr = np.corrcoef(x, y)[0, 1]
+    # проверяем, что оба значения совпадают с заданной точностью
+    assert np.isclose(corr, np_corr)
