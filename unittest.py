@@ -1,8 +1,9 @@
 # импортируем необходимые модули
-import code
+import code_1
 import pytest
 import mock
 import numpy as np
+from code_1 import quantile, covariance, correlation
 
 
 @pytest.fixture
@@ -54,7 +55,7 @@ def test_variance(x, expected):
 
     Предполагает, что функция code.variance возвращает дисперсию массива.
     """
-    assert code.variance(x) == expected
+    assert code_1.variance(x) == expected
 
 
 @pytest.mark.parametrize("x, expected", [
@@ -72,7 +73,7 @@ def test_std(x, expected):
 
     Предполагает, что функция code.std возвращает стандартное отклонение массива.
     """
-    assert code.std(x) == expected
+    assert code_1.std(x) == expected
 
 
 @pytest.mark.parametrize("x, expected", [
@@ -92,7 +93,7 @@ def test_median(x, expected):
 
     Предполагает, что функция code.median возвращает медиану массива.
     """
-    assert code.median(x) == expected
+    assert code_1.median(x) == expected
 
 
 @pytest.mark.parametrize("x, expected", [
@@ -113,7 +114,7 @@ def test_mode(x, expected):
 
     Предполагает, что функция code.mode возвращает моду массива.
     """
-    assert np.array_equal(code.mode(x), expected)
+    assert np.array_equal(code_1.mode(x), expected)
 
 
 @pytest.fixture
@@ -135,9 +136,9 @@ def test_random_array(random_array):
 
     Предполагает, что функции code.mean, code.variance и code.std возвращают те же значения, что и np.mean, np.var и np.std.
     """
-    assert code.mean(random_array) == np.mean(random_array)
-    assert code.variance(random_array) == np.var(random_array)
-    assert code.std(random_array) == np.std(random_array)
+    assert code_1.mean(random_array) == np.mean(random_array)
+    assert code_1.variance(random_array) == np.var(random_array)
+    assert code_1.std(random_array) == np.std(random_array)
 
 
 @pytest.fixture
@@ -159,8 +160,8 @@ def test_variance_with_mock_mean(mock_mean):
 
     Предполагает, что функция code.variance возвращает 0, если функция code.mean подменена подделкой, которая всегда возвращает 0.
     """
-    code.mean = mock_mean
-    assert code.variance(np.array([1, 2, 3, 4, 5])) == 0
+    code_1.mean = mock_mean
+    assert code_1.variance(np.array([1, 2, 3, 4, 5])) == 0
     mock_mean.assert_called_once_with(np.array([1, 2, 3, 4, 5]))
 
 @pytest.mark.parametrize("p, expected", [
