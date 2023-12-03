@@ -133,3 +133,14 @@ def test_quantile(random_data, p, expected):
     else:
         # проверяем, что функция quantile возвращает ожидаемое значение с заданной точностью
         assert np.isclose(quantile(x, p), expected, atol=1)
+        
+# определяем тест для функции covariance
+def test_covariance(random_data):
+    # получаем два массива случайных данных из фикстуры
+    x, y = random_data
+    # вычисляем ковариацию с помощью функции covariance
+    cov = covariance(x, y)
+    # вычисляем ковариацию с помощью встроенной функции numpy
+    np_cov = np.cov(x, y, ddof=0)[0, 1]
+    # проверяем, что оба значения совпадают с заданной точностью
+    assert np.isclose(cov, np_cov)
