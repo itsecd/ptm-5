@@ -2,7 +2,7 @@ import os
 import pytest
 from main import clear
 from wordle import Wordle
-from unittest.mock import patch
+import unittest.mock
 
 
 def test_wordle_initialization():
@@ -16,7 +16,7 @@ def test_wordle_initialization():
 @pytest.mark.parametrize("invalid_guess", ["abcde", "12345", "word", "sixletters"])
 def test_invalid_user_guess(invalid_guess):
     wordle = Wordle()
-    patch("builtins.input", side_effect=invalid_guess)
+    unittest.mock.patch("builtins.input", side_effect=invalid_guess)
     with pytest.raises(OSError):
         wordle.get_user_guess()
     assert wordle.user_guess == ""
@@ -28,7 +28,7 @@ def test_invalid_user_guess(invalid_guess):
 ])
 def test_get_user_guess(user_inputs, expected_output):
     wordle = Wordle()
-    with patch("builtins.input", side_effect=user_inputs):
+    with unittest.mock.patch("builtins.input", side_effect=user_inputs):
         wordle.get_user_guess()
     assert (len(wordle.user_guess) == wordle.max_words or
             wordle.user_guess in wordle.words or
@@ -62,10 +62,10 @@ def test_check_word_incorrect_guess():
     assert status is False
 
 
-@patch('os.system')
+@unittest.mock.patch('os.system')
 def test_clear_windows(os_system):
-    patch("os.name", return_value="nt")
-    patch("os.system")
-    patch("logger1.info")
+    unittest.mock.patch("os.name", return_value="nt")
+    unittest.mock.patch("os.system")
+    unittest.mock.patch("logger1.info")
     clear()
     os_system.assert_called_once_with("cls")
