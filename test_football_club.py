@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import Mock
 from football_club import Player, MatchResult, FootballClub
 
 
