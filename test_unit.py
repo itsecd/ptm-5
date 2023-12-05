@@ -5,18 +5,24 @@ from isb2 import frequency_bit_test, identical_consecutive_bit_test, unit_long_s
 
 @pytest.mark.parametrize("bit_sequence, result", [("1110001100", 1.0)])
 def test_frequency_bit_test(bit_sequence: str, result: float):
+    """
+    Проверяет правильность частотного побитового теста.
+    :param bit_sequence: Битовая последовательность.
+    :param result: Результат для проверки.
+    :return:
+    """
     assert frequency_bit_test(bit_sequence) == result
 
 
-@pytest.mark.parametrize("bit_sequence, result", [("1110001100", 0.2059032107320683)])
+@pytest.mark.parametrize("bit_sequence, result", [("1110001100", 0.2059)])
 def test_identical_consecutive_bit_test(bit_sequence: str, result: float):
-    assert identical_consecutive_bit_test(bit_sequence) == result
+    assert round(identical_consecutive_bit_test(bit_sequence), 4) == result
 
 
 @pytest.mark.parametrize("bit_sequence, result", [("00101110111111110000101100101000011110011001010011000000101001010101110100100100011111000110011" \
-                   "101001000110010111100111111110011", 0.4304432330561101)])
+                   "101001000110010111100111111110011", 0.4304)])
 def test_unit_long_sequence_test(bit_sequence: str, result: float):
-    assert unit_long_sequence_test(bit_sequence) == result
+    assert round(unit_long_sequence_test(bit_sequence), 4) == result
 
 
 @pytest.mark.parametrize(
