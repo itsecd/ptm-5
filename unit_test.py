@@ -62,10 +62,8 @@ def test_check_word_incorrect_guess():
     assert status is False
 
 
+@unittest.mock.patch('os.name', 'nt')
 @unittest.mock.patch('os.system')
 def test_clear_windows(os_system):
-    unittest.mock.patch("os.name", return_value="nt")
-    unittest.mock.patch("os.system")
-    unittest.mock.patch("logger1.info")
     clear()
-    os_system.assert_called_once_with("cls")
+    os_system.assert_called_once_with('cls')
