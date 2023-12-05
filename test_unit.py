@@ -22,6 +22,11 @@ def product() -> Product:
 
 
 def test_change_price() -> None:
+    """
+    test for the change_price method
+    :store: ProductStore
+    :return: None
+    """
     product = Product("TestProduct1", 10.0, 10, "2023-01-01")
     assert product.price == 10.0
     product.change_price(15.0)
@@ -29,18 +34,28 @@ def test_change_price() -> None:
 
 
 def test_add_product(store: ProductStore) -> None:
-    assert store.add_product(product1) == True
+    """
+    test for the add_product method
+    :store: ProductStore
+    :return: None
+    """
+    assert store.add_product(Product("TestProduct1", 1.00, 10, "2023-01-01")) == True
     assert len(store.products) == 1
 
-    assert store.add_product(product1) == False
+    assert store.add_product(Product("TestProduct1", 1.00, 10, "2023-01-01")) == False
     assert len(store.products) == 1
 
-    assert store.add_product(product2) == True
+    assert store.add_product(Product("TestProduct2", 0.99, 3, "2022-01-01")) == True
     assert len(store.products) == 2
 
 
 def test_product_exists(store: ProductStore) -> None:
-    store.add_product(product1)
+    """
+    test for the product_exists method
+    :store: ProductStore
+    :return: None
+    """
+    store.add_product(Product("TestProduct1", 1.00, 10, "2023-01-01"))
     assert store.product_exists("TestProduct1") == True
     assert store.product_exists("TestProduct2") == False
 
@@ -48,37 +63,47 @@ def test_product_exists(store: ProductStore) -> None:
 @pytest.mark.parametrize("filename", ["test_product.csv", "nonexistent_file.csv"])
 def test_write_to_csv(store: ProductStore, filename: str) -> None:
     """
-    тест для метода write_to_csv
-    :param shop: ShopInventory
-    :param filename: имя файла str
+    test for the write_to_csv method
+    :storer: ProductStore
+    :filename parameter: filename str
     :return: None
     """
-    store.add_product(product1)
-    store.add_product(product2)
+    store.add_product(Product("TestProduct1", 1.00, 10, "2023-01-01"))
+    store.add_product(Product("TestProduct2", 0.99, 3, "2022-01-01"))
     store.write_to_csv(filename)
 
 
 @pytest.mark.parametrize("filename", ["test_product.csv", "nonexistent_file.csv"])
 def test_read_from_csv(store: ProductStore, filename: str) -> None:
     """
-    тест для метода load_from_csv
-    :param shop: ShopInventory
-    :param filename: имя файла str
+    test for the read_from_csv method
+    :store: ProductStore
+    :filename parameter: filename str
     :return: None
     """
     store.read_from_csv(filename)
 
 
 def test_clear_products(store: ProductStore) -> None:
-    store.add_product(product1)
+    """
+    test for the clear_products method
+    :store: ProductStore
+    :return: None
+    """
+    store.add_product(Product("TestProduct1", 1.00, 10, "2023-01-01"))
     store.clear_products()
     assert len(store.products) == 0
 
 
 def test_sort_by_price(store: ProductStore) -> None:
-    store.add_product(product1)
-    store.add_product(product2)
-    store.add_product(product3)
+    """
+    test for the sort_by_price method
+    :store: ProductStore
+    :return: None
+    """
+    store.add_product(Product("TestProduct1", 1.00, 10, "2023-01-01"))
+    store.add_product(Product("TestProduct2", 0.99, 3, "2022-01-01"))
+    store.add_product(Product("TestProduct3", 1.50, 15, "1962-01-01"))
 
     store.sort_by_price()
 
@@ -87,7 +112,5 @@ def test_sort_by_price(store: ProductStore) -> None:
     assert store.products[2].name == "TestProduct3"
 
 
-product1 = Product("TestProduct1", 1.00, 10, "2023-01-01")
-product2 = Product("TestProduct2", 0.99, 3, "2022-01-01")
-product3 = Product("TestProduct3", 1.50, 15, "1962-01-01")
-pytest.main(["-v", "test_unit.py"])
+if __name__ == "__main__":
+    pytest.main(["-v", "-color=yes"])
