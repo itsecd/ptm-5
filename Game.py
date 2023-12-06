@@ -28,17 +28,6 @@ class Globals:
             "Play", "Scoreboard", "EXIT"
         ]
 
-        self.directions_list = list()
-        self.__gen_directions()
-
-    # Essa função apenas constroe o self.directions_list automáticamente.
-    def __gen_directions(self):
-        all_directions = ["left", "down", "up", "right"]
-
-        for directions_group in all_directions:
-            for single_direction in directions_group:
-                self.directions_list.append(single_direction)
-
 
 class Menu(Globals):
     """
@@ -55,40 +44,40 @@ class Menu(Globals):
     @property
     def start(self):
         logger.info('MENU_OPENED', description='menu was opened')
-        curses.wrapper(self.__run)
+        curses.wrapper(self._run)
         logger.info('MENU_CLOSED', description='menu was closed')
 
     # Tira o cursor piscando, define um par de cores e depois desenha a tela.
-    def __run(self, screen):
+    def _run(self, screen):
         curses.curs_set(False)
         curses.init_pair(1, curses.COLOR_BLUE, curses.COLOR_BLACK)
 
-        self.__loop(screen)
+        self._loop(screen)
 
     # screen é o objeto que desenha as informações na tela. O loop atualiza as informações a todo momento.
-    def __loop(self, screen):
+    def _loop(self, screen):
         while 1:
-            self.__y_len, self.__x_len = screen.getmaxyx()
+            self._y_len, self._x_len = screen.getmaxyx()
             screen.clear()
 
             # Desenha um retângulo na tela.
             rectangle(
                 screen, 5, 12,
-                self.__y_len - 6, self.__x_len - 15
+                self._y_len - 6, self._x_len - 15
             )
 
-            self.__show_menu(screen)
+            self._show_menu(screen)
 
-            if self.__keyboard(screen):
+            if self._keyboard(screen):
                 break
             else:
                 screen.refresh()
 
     # Desenha os itens do menu centralizados na tela.
-    def __show_menu(self, screen):
+    def _show_menu(self, screen):
         for index, text in enumerate(self.menu_list):
-            x = self.__x_len // 2 - len(text) // 2
-            y = self.__y_len // 2 - len(self.menu_list) // 2 + index
+            x = self._x_len // 2 - len(text) // 2
+            y = self._y_len // 2 - len(self.menu_list) // 2 + index
 
             # Se o ítem for selecionado, ele mostra o item azul.
             if self.selected_item == index:
@@ -98,7 +87,7 @@ class Menu(Globals):
             screen.attroff(curses.color_pair(1))
 
     # Detecta as teclas precionadas e retorna True se for uma tecla "return".
-    def __keyboard(self, screen):
+    def _keyboard(self, screen):
         key = screen.getch()
 
         if key in self.keys["up"] and self.selected_item > 0:
@@ -123,22 +112,21 @@ class Play(Globals):
     def __init__(self, snake_body_fill, apple_fill):
         super().__init__()
 
-        self.__snake_body_fill = snake_body_fill
-        self.__apple_fill = apple_fill
+        self._snake_body_fill = snake_body_fill
+        self._apple_fill = apple_fill
 
-        self.__pause = False
+        self._pause = False
         self.score = None
-
 
     @property
     def start(self):
         logger.info('PLAYING_STARTED', description='playing was started')
-        curses.wrapper(self.__run)
+        curses.wrapper(self._run)
         logger.info('PLAYING_ENDED', description='playing was ended')
 
     # Configura a taxa de atualização da tela e carrega os "sprites iniciais" na tela.
-    def __run(self, screen):
-        self.__y_len, self.__x_len = screen.getmaxyx()
+    def _run(self, screen):
+        self._y_len, self._x_len = screen.getmaxyx()
 
         # Setup inicial para a nova screen que será carregada.
         curses.curs_set(False)
@@ -148,7 +136,7 @@ class Play(Globals):
         # Desenha a área do mapa na tela.
         rectangle(
             screen, 2, 5,
-            self.__y_len - 3, self.__x_len - 6
+            self._y_len - 3, self._x_len - 6
         )
 
         # Reseta a pontuação.
@@ -158,74 +146,74 @@ class Play(Globals):
         ]
 
         # Carrega os elementos e inicia o jogo.
-        self.__load_content(screen)
-        self.__loop(screen)
+        self._load_content(screen)
+        self._loop(screen)
 
-    def __loop(self, screen):
+    def _loop(self, screen):
         while 1:
             # Se a cobra estiver subindo/descendo, ela vai mais devagar...
-            if self.__current_direction in ["up", "down"]:
+            if self._current_direction in ["up", "down"]:
                 screen.timeout(60)
             else:
                 screen.timeout(40)
 
-            self.__get_new_direction(screen, self.__current_direction)
+            self._get_new_direction(screen, self._current_direction)
 
             # Se o jogo não estiver pausado, ele continua...
-            if not self.__pause:
-                self.__move_snake_head(screen)
-                self.__remove_the_tail(screen)
+            if not self._pause:
+                self._move_snake_head(screen)
+                self._remove_the_tail(screen)
 
-            if self.__condictions_to_lose():
+            if self._condictions_to_lose():
                 break
 
             screen.refresh()
 
     # Cira o corpo da cobra, define uma direção e spawna uma maçã.
-    def __load_content(self, screen):
-        self.__snake_body = [
+    def _load_content(self, screen):
+        self._snake_body = [
             [
-                self.__y_len // 2,
-                self.__x_len // 2
+                self._y_len // 2,
+                self._x_len // 2
             ]
         ]
 
         # Agora, seta uma direção default e spawna uma maçã.
-        self.__current_direction = "right"
-        self.__spawn_apple(screen)
+        self._current_direction = "right"
+        self._spawn_apple(screen)
 
         # Spawna o corpo (0 e 1) da cobra, com base nas cordenadas da cabeça (0).
         screen.addstr(
-            self.__snake_body[0][0],
-            self.__snake_body[0][1],
-            self.__snake_body_fill
+            self._snake_body[0][0],
+            self._snake_body[0][1],
+            self._snake_body_fill
         )
 
     # Seleciona, aleatoriamente, uma posição na tela, baseado em seu tamanho.
-    def __get_apple_position(self):
+    def _get_apple_position(self):
         while 1:
             apple = [
-                random.randint(3, self.__y_len - 4),
-                random.randint(6, self.__x_len - 7)
+                random.randint(3, self._y_len - 4),
+                random.randint(6, self._x_len - 7)
             ]
 
             # Se a posição cair em cima da cobra, ele gera novamente até encontrar...
-            if apple not in self.__snake_body:
+            if apple not in self._snake_body:
                 break
         return apple
 
     # Faz a maçã aparecer na tela e guarda as cordenadas dessa posição.
-    def __spawn_apple(self, screen):
-        self.apple = self.__get_apple_position()
+    def _spawn_apple(self, screen):
+        self.apple = self._get_apple_position()
 
         screen.addstr(
             self.apple[0], self.apple[1],
-            self.__apple_fill
+            self._apple_fill
         )
         logger.info('APPLE_SPAWNED', description='apple was spawned', params={"X": self.apple[0], "Y": self.apple[1]})
 
     # Muda de direção, ou não, com base na tecla precionada.
-    def __get_new_direction(self, screen, direction):
+    def _get_new_direction(self, screen, direction):
         key = screen.getch()
         new_direction = None
 
@@ -241,83 +229,83 @@ class Play(Globals):
             and new_direction != "return"
         ):
             logger.info('DIRECTION_CHANGED', description='snake direction was changed',
-                        params={"previous": self.__current_direction, "current": new_direction})
-            self.__current_direction = new_direction
+                        params={"previous": self._current_direction, "current": new_direction})
+            self._current_direction = new_direction
         if new_direction == self.oposite[direction]:
             logger.warning('OPPOSITE_DIRECTION_CHANGED', description='snake cannot move backwards',
-                           params={"current": self.__current_direction, "opposite": new_direction})
+                           params={"current": self._current_direction, "opposite": new_direction})
 
         # Se a tecla for "return" ele troca os valores de self.__pause...
         elif new_direction == "return":
-            if self.__pause:
-                self.__pause = False
+            if self._pause:
+                self._pause = False
                 logger.info('PLAYING_CONTINUED', description='playing was continued')
             else:
-                self.__pause = True
+                self._pause = True
                 logger.info('PLAYING_PAUSED', description='playing was paused')
 
     # Desenha uma nova cabeça na frente da cobra, com base na direção atual.
-    def __move_snake_head(self, screen):
-        self.__snake_head = self.__snake_body[0]
+    def _move_snake_head(self, screen):
+        self._snake_head = self._snake_body[0]
 
         # Pega as cordenadas da direção atual, com base nas cordenadas da cabeça da cobra.
-        if self.__current_direction == "right":
-            self.__ghost_snake_head = [self.__snake_head[0], self.__snake_head[1] + 1]
+        if self._current_direction == "right":
+            self._ghost_snake_head = [self._snake_head[0], self._snake_head[1] + 1]
 
-        elif self.__current_direction == "left":
-            self.__ghost_snake_head = [self.__snake_head[0], self.__snake_head[1] - 1]
+        elif self._current_direction == "left":
+            self._ghost_snake_head = [self._snake_head[0], self._snake_head[1] - 1]
 
-        elif self.__current_direction == "up":
-            self.__ghost_snake_head = [self.__snake_head[0] - 1, self.__snake_head[1]]
+        elif self._current_direction == "up":
+            self._ghost_snake_head = [self._snake_head[0] - 1, self._snake_head[1]]
 
-        elif self.__current_direction == "down":
-            self.__ghost_snake_head = [self.__snake_head[0] + 1, self.__snake_head[1]]
+        elif self._current_direction == "down":
+            self._ghost_snake_head = [self._snake_head[0] + 1, self._snake_head[1]]
 
         # Desenha a nova cabeça com as novas cordenadas na tela.
         screen.addstr(
-            self.__ghost_snake_head[0],
-            self.__ghost_snake_head[1],
-            self.__snake_body_fill
+            self._ghost_snake_head[0],
+            self._ghost_snake_head[1],
+            self._snake_body_fill
         )
 
         # Depois, salva essas novas cordenadas na lista em memória.
-        self.__snake_body.insert(0, self.__ghost_snake_head)
+        self._snake_body.insert(0, self._ghost_snake_head)
 
     # Remove a cauda da cobra, tanto em memória quanto em tela, e contar um ponto.
-    def __remove_the_tail(self, screen):
-        if self.__snake_head == self.apple:
+    def _remove_the_tail(self, screen):
+        if self._snake_head == self.apple:
             self.score[1] += 1
             logger.info('APPLE_EATEN', description='apple was eaten, snake grew up',
-                        params={"scope": self.score[1], "snake_length": len(self.__snake_body)})
-            self.__spawn_apple(screen)
+                        params={"scope": self.score[1], "snake_length": len(self._snake_body)})
+            self._spawn_apple(screen)
 
             screen.addstr(2, 7, f" Score: {self.score[1]} ")
 
         else:
             screen.addstr(
-                self.__snake_body[-1][0],
-                self.__snake_body[-1][1],
+                self._snake_body[-1][0],
+                self._snake_body[-1][1],
                 " "
             )
 
-            self.__snake_body.pop()
+            self._snake_body.pop()
 
     # Condições para perder no jogo.
-    def __condictions_to_lose(self):
+    def _condictions_to_lose(self):
         if (
             # Se a cabeça da cobra bater nas quinas do mapa...
-            self.__snake_head[0] <= 2 or self.__snake_head[0] >= self.__y_len - 3
-            or self.__snake_head[1] <= 5 or self.__snake_head[1] >= self.__x_len - 6
+            self._snake_head[0] <= 2 or self._snake_head[0] >= self._y_len - 3
+            or self._snake_head[1] <= 5 or self._snake_head[1] >= self._x_len - 6
         ):
             logger.info('SNAKE_DIED', description='snake ran into a wall',
-                        params={"scope": self.score[1], "snake_length": len(self.__snake_body)})
+                        params={"scope": self.score[1], "snake_length": len(self._snake_body)})
             return 1
         if (
                 # Se a cabeça da cobra bater no seu próprio corpo...
-                self.__ghost_snake_head in self.__snake_body[1:]
+                self._ghost_snake_head in self._snake_body[1:]
         ):
             logger.info('SNAKE_DIED', description='snake ran into its body part',
-                        params={"scope": self.score[1], "snake_length": len(self.__snake_body)})
+                        params={"scope": self.score[1], "snake_length": len(self._snake_body)})
             return 1
 
 
@@ -330,64 +318,64 @@ class ScoreBoard(Globals):
 
     def __init__(self):
         super().__init__()
-        self.__score_list = list()
+        self._score_list = list()
         # self.__score_list = [["lafjkdslfjadslf", 123], ["lafjkdslfjadslf", 123], ["lafjkdslfjadslf", 123]]
-        self.__y_value = 3
-        self.__x_value = 7
+        self._y_value = 3
+        self._x_value = 7
 
     @property
     def start(self):
         logger.info('SCORE_OPENED', description='score board was opened')
-        curses.wrapper(self.__run)
+        curses.wrapper(self._run)
         logger.info('SCORE_CLOSED', description='score board was closed')
 
-    def __run(self, screen):
+    def _run(self, screen):
         curses.curs_set(False)
         screen.clear()
 
-        self.__loop(screen)
+        self._loop(screen)
 
-    def __loop(self, screen):
+    def _loop(self, screen):
         while 1:
-            for key, value in enumerate(self.__score_list):
+            for key, value in enumerate(self._score_list):
                 # Isso garante que a lista será escrita na tela toda...
                 try:
                     screen.addstr(
-                        self.__y_value + key,
-                        self.__x_value,
+                        self._y_value + key,
+                        self._x_value,
                         f"[{value[0]}] >>> {value[1]}"
                     )
                 except:
                     pass
 
             # Se qualquer tecla for precionada, o loop será interrompido.
-            self.__key = screen.getch()
+            self._key = screen.getch()
 
-            if self.__key in self.keys["return"]:
+            if self._key in self.keys["return"]:
                 break
 
     def add_score(self, score):
         # Se a lista estiver vazia, basta anexar o único score registrado.
-        if len(self.__score_list) == 0:
-            self.__score_list.append(score)
+        if len(self._score_list) == 0:
+            self._score_list.append(score)
             logger.info('SCORE_ADDED', description='new score was added', params={"rank": 1, "score": score[1]})
             return
 
         # Procura uma posição para adicionar o novo valor.
-        for key, value in enumerate(self.__score_list):
+        for key, value in enumerate(self._score_list):
             if score[1] > value[1]:
-                self.__score_list.insert(key, score)
+                self._score_list.insert(key, score)
                 logger.info('SCORE_ADDED', description='new score was added', params={"rank": key + 1, "score": score[1]})
                 break
 
             elif score[1] == value[1]:
-                self.__score_list.insert(key + 1, score)
+                self._score_list.insert(key + 1, score)
                 logger.info('SCORE_ADDED', description='new score was added', params={"rank": key + 2, "score": score[1]})
                 break
 
-            elif key == len(self.__score_list) - 1:
-                self.__score_list.append(score)
+            elif key == len(self._score_list) - 1:
+                self._score_list.append(score)
                 logger.info('SCORE_ADDED', description='new score was added',
-                            params={"rank": len(self.__score_list), "score": score[1]})
+                            params={"rank": len(self._score_list), "score": score[1]})
                 break
 
