@@ -157,7 +157,7 @@ class Play(Globals):
             else:
                 screen.timeout(40)
 
-            self._get_new_direction(screen, self._current_direction)
+            self._get_new_direction(screen)
 
             # Se o jogo não estiver pausado, ele continua...
             if not self._pause:
@@ -213,7 +213,7 @@ class Play(Globals):
         logger.info('APPLE_SPAWNED', description='apple was spawned', params={"X": self.apple[0], "Y": self.apple[1]})
 
     # Muda de direção, ou não, com base na tecla precionada.
-    def _get_new_direction(self, screen, direction):
+    def _get_new_direction(self, screen):
         key = screen.getch()
         new_direction = None
 
@@ -225,13 +225,13 @@ class Play(Globals):
         # Só muda de direção se a nova direção não for a mesma ou oposta, ou se não for "return"...
         if (
             new_direction in self.keys.keys()
-            and new_direction != self.oposite[direction]
+            and new_direction != self.oposite[self._current_direction]
             and new_direction != "return"
         ):
             logger.info('DIRECTION_CHANGED', description='snake direction was changed',
                         params={"previous": self._current_direction, "current": new_direction})
             self._current_direction = new_direction
-        if new_direction == self.oposite[direction]:
+        if new_direction == self.oposite[self._current_direction]:
             logger.warning('OPPOSITE_DIRECTION_CHANGED', description='snake cannot move backwards',
                            params={"current": self._current_direction, "opposite": new_direction})
 

@@ -1,64 +1,6 @@
-from Game import ScoreBoard, Play, Menu
+from Game import Menu
 import curses
-import pytest
-
-
-class FakeScreen:
-    """
-    Класс подменяет класс Screen библиотеки curses.
-    """
-    def __init__(self):
-        """
-        Инициализация класса FakeScreen.
-        Поле attributes - список строк, расположенных на экране с их координатами.
-        Поле highlight_item - текущий выделенная на экране строка.
-        Поле pressed_key - текущая нажатая клавиша.
-        """
-        self.attributes = []
-        self.highlight_item = -1
-        self.pressed_key = 119
-
-    def addstr(self, x: int, y: int, text: str) -> None:
-        """
-        Подмена метода addstr. Добавляет к списку строк с координатами введённое значение.
-        :param x: координата строки по оси x.
-        :param y: координата строки по оси y.
-        :param text: текст исходной строки.
-        :return: нет возвращаемого значения.
-        """
-        self.attributes.append((x, y, text))
-
-    def attron(self, color: int) -> None:
-        """
-        Подмена метода attron. Сохраняет выделенный элемент меню.
-        :param color: цвет.
-        :return: нет возвращаемого значения.
-        """
-        self.highlight_item = len(self.attributes)
-
-    def attroff(self, color: int) -> None:
-        """
-        Подмена метода attroff.
-        :param color: цвет.
-        :return: нет возвращаемого значения.
-        """
-        pass
-
-    def getch(self) -> int:
-        """
-        Подмена метода getch. Возвращает текущую нажатую клавишу.
-        :return: текущая нажатая клавиша.
-        """
-        return self.pressed_key
-
-
-def fake_color_pair(color_number: int) -> int:
-    """
-    Подмена функции color_pair библиотеки curses. Возвращает число типа int в качестве цвета.
-    :param color_number: номер цвета.
-    :return: цвет.
-    """
-    return color_number
+from fake import FakeScreen, fake_color_pair
 
 
 class TestMenu:
