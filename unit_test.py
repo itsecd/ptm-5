@@ -37,7 +37,7 @@ def test_mean(x, expected):
 
     Предполагает, что функция code.mean возвращает среднее значение массива.
     """
-    assert code.mean(x) == expected
+    assert code_1.mean(x) == expected
 
 
 @pytest.mark.parametrize("x, expected", [
