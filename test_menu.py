@@ -2,6 +2,10 @@ from Game import Menu
 import curses
 from fake import FakeScreen, fake_color_pair
 
+"""
+Модуль для тестирования класса Menu.
+"""
+
 
 class TestMenu:
     @classmethod

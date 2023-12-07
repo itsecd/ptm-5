@@ -1,5 +1,9 @@
 from Game import ScoreBoard
 
+"""
+Модуль для тестирования класса Scoreboard.
+"""
+
 
 class TestScoreBoard:
     @classmethod

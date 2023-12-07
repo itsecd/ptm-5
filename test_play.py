@@ -2,6 +2,10 @@ from Game import Play
 import random
 from fake import FakeScreen, FakeRandom
 
+"""
+Модуль для тестирования класса Play.
+"""
+
 
 class TestPlay:
     @classmethod
