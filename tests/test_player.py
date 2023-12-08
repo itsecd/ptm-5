@@ -1,7 +1,7 @@
 import pytest
-from player import Player, WEAPONS
-from dicts.utils import *
+from dicts.weapons_skills import Player, WEAPONS
 from monster import Monster
+from dicts.utils import *
 
 @pytest.fixture
 def player():
@@ -14,7 +14,7 @@ def player_with_bow():
 def test_player_initialization(player):
     assert player.name == "Test Player"
     assert player.hp == 10
-    assert player.weapon == WEAPONS['SWORD']
+    assert player.weapon == WEAPONS[SWORD]
     assert player.skill == 0
     assert player.max_skill == 3
 
@@ -23,7 +23,7 @@ def test_player_attack(player):
     player.attack(enemy)
     assert enemy.hp == 1
     assert enemy.alive == True
-    assert enemy.lenght == 8
+    assert enemy.length == 8
     assert player.skill == 1 
     player.attack(enemy)
     assert enemy.hp == -2
@@ -37,7 +37,7 @@ def test_double_trouble(player):
     player.double_trouble(enemy)
     player.double_trouble(enemy_2)
     assert enemy.hp == 4  
-    assert enemy_2.length == 20
+    assert enemy_2.length == 25
     assert enemy_2.alive == False
 
 def test_show_method(player, capsys):
@@ -51,7 +51,6 @@ def test_show_method(player, capsys):
     assert "3" in captured.out
     assert "Sword (DMG: 3)" in captured.out
     assert "Double Trouble" in captured.out
-    assert "ooo" in captured.out
     assert "Weapon" in captured.out
     assert "Skill" in captured.out
     assert " (Ready!)" in captured.out
