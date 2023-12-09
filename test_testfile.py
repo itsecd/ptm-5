@@ -1,7 +1,6 @@
 import pytest
 from unittest.mock import patch, MagicMock, mock_open
 
-# Предполагается, что ваш класс GymJournal находится в файле gym_journal.py
 from main import GymJournal
 
 # Тест на проверку существования клиента
