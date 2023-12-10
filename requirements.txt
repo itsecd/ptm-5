@@ -20,3 +20,4 @@ urllib3==1.26.12
 wincertstore==0.2
 pytest==7.4.3
 pytest-cov==4.1.0
+pywin32==227
