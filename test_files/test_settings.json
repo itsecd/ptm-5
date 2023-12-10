@@ -1,0 +1,8 @@
+{
+    "hash":"4006234246b4fd2b2",
+    "last_numbers":"0254",
+    "bins":[510126, 519778],
+    "card_number":"data/card_number.txt",
+    "stats":"data/stats.csv",
+    "graph":"data/graph.jpg"
+}
