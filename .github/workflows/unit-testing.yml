@@ -23,7 +23,7 @@ jobs:
         python-version: '3.10'  # Замените на требуемую версию Python
 
     - name: Install pywin32
-      run: pip install pywin32
+      run: pip install pypiwin32
 
     - name: Install dependencies
       run: |
