@@ -1,3 +1,1 @@
-SomePackage
-AnotherPackage
-pywin32>=224; platform_system == "Windows"
+anotherpackage==2.0.0
