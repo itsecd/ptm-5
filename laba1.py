@@ -5,9 +5,6 @@ import json
 from bs4 import BeautifulSoup
 
 
-HEADERS = {"User-Agent": "Windows 10"}
-
-
 def change_years(year: int, url: str) -> str:
     """Function that changes the year in the url.
 
@@ -22,7 +19,7 @@ def change_years(year: int, url: str) -> str:
     return url
 
 
-def redact_days(output: list[str]) -> str:
+def day_num_to_str(output: list[str]) -> str:
     """A function that edits the day number in the output array.
 
     Args:
@@ -62,7 +59,7 @@ def check_month(url: str) -> int:
     """
     month = 1
     while True:
-        html_text = requests.get(url, HEADERS).text
+        html_text = requests.get(url, headers={"User-Agent": "Sasha"}).text
         parse = BeautifulSoup(html_text, "lxml")
         is_error_element = parse.find("div", class_="grey digit")
         if is_error_element:
@@ -119,7 +116,8 @@ def parse_data(current_url: str, max_year: int) -> str:
         str: current url
     """
     while True:
-        html_text = requests.get(current_url, HEADERS).text
+        html_text = requests.get(current_url, headers={
+                                 "User-Agent": "Sasha"}).text
         parse = BeautifulSoup(html_text, "lxml")
         is_error_element = parse.find("div", class_="grey digit")
         if is_error_element:
@@ -150,7 +148,7 @@ if __name__ == "__main__":
                 is_last_month = 1
             else:
                 url = change_months(url, current_month, 1)
-            html_text = requests.get(url, HEADERS).text
+            html_text = requests.get(url, headers={"User-Agent": "Sasha"}).text
             soup = BeautifulSoup(html_text, "lxml")
             rows = soup.find_all("tr", align="center")
             for i in range(len(rows)):
@@ -165,7 +163,7 @@ if __name__ == "__main__":
                         (
                             str(current_year) + "-"
                             + month_num_to_str(current_month) + "-"
-                            + redact_days(output),
+                            + day_num_to_str(output),
                             output[1],
                             output[2],
                             output[3],
