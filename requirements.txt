@@ -1,1 +1,3 @@
-pywin32>=224
+SomePackage
+AnotherPackage
+pywin32>=224; platform_system == "Windows"
