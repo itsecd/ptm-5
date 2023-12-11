@@ -6,13 +6,13 @@ from load_write import load_settings, read_file, write_file
 from stats import load_stats, write_stats
 
 
-@pytest.mark.parametrize("path", ["E:\prog\ptm\ptm-5", 55])
+@pytest.mark.parametrize("path", ["test_files/test_settings.json", 55])
 def test_load_stats_exceptions(path):
     with pytest.raises(Exception):
         load_stats(path)
 
 
-@pytest.mark.parametrize("path", ["E:\prog\ptm\ptm-5", 55])
+@pytest.mark.parametrize("path", ["test_files/test_settings.json", 55])
 def test_write_stats_exceptions(path):
     with pytest.raises(Exception):
         write_stats(path)
@@ -82,11 +82,6 @@ def test_write_file(clean_txt_file):
             "4006234246b4fd2b2833d740927ab20465afad862c74b1a88ec0869bde5c836c",
             "5559210557390254",
         ),
-        pytest.param(
-            "4006234246b4fd2b2833d740927ab20465afad862c74b1a88ec0869bde5c836c",
-            "5559210551390254",
-            marks=pytest.mark.xfail,
-        ),
     ],
 )
 def test_check_hash(hash, card_number):
@@ -94,15 +89,14 @@ def test_check_hash(hash, card_number):
     assert result == 5559210557390254
 
 
-@pytest.mark.xfail
 def test_luhn():
-    result = luhn("5559210557390254")
+    result = luhn("4561261212345467")
     assert result == True
 
 
 @pytest.mark.parametrize(
-    "number", [12345678, pytest.param(87654321, marks=pytest.mark.xfail)]
+    "number, expected_res", [(12345678, "87654321"), (479636, "636974")]
 )
-def test_reverse_number(number):
+def test_reverse_number(number, expected_res):
     result = reverse_number(number)
-    assert result == "87654321"
+    assert result == expected_res

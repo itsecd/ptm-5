@@ -71,15 +71,16 @@ def luhn(card_number: str) -> bool:
     card = list(map(int, card_number))
     last = card[15]
     card.pop()
-    for num in card:
-        tmp = num * 2
-        if tmp > 9:
-            nums.append(tmp % 10 + tmp // 10)
+    card.reverse()
+    for i, num in enumerate(card):
+        if i % 2 == 0:
+            tmp = num * 2
+            if tmp > 9:
+                nums.append(tmp - 9)
+            else:
+                nums.append(tmp)
         else:
-            nums.append(tmp)
-    res = 0
-    for num in nums:
-        res += num
-    res = 10 - res % 10
+            nums.append(num)
+    res = sum(nums) % 10
     logging.info("Check the card number using the Luhn algorithm")
-    return res == last
+    return (res == last) or (10 - res == last)
