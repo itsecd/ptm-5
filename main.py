@@ -40,7 +40,7 @@ class To_do_list:
         """
         self.logger.info("output to-do-list")
         for job in self.jobs.keys():
-            print(job, self.jobs[job])
+            print(job, " - ", self.jobs[job])
 
     def count_job(self) -> int:
         """
@@ -83,10 +83,23 @@ class To_do_list:
         """
         try:
             with open(file, 'w', newline='') as name:
-                writer = csv.writer(name)
+                writer = csv.writer(name, delimiter = ",")
                 for job in self.jobs.keys():
-                    writer.writerow([job])
+                    writer.writerow([job, self.jobs[job]])
                 self.logger.info(f"writing data in: {file}")
+        except FileNotFoundError:
+            self.logger.warning(f"File '{file}' was not found")
+
+    def read_csv(self, file: str) -> None:
+        """
+        Reading dict with jobs from csv-file
+        """
+        try:
+            with open(file, 'r') as name:
+                reader = csv.reader(name, delimiter = ",")
+                for row in reader:
+                    self.jobs[row[0]] = row[1]
+                self.logger.info(f"reading data from: {file}")
         except FileNotFoundError:
             self.logger.warning(f"File '{file}' was not found")
 
@@ -120,6 +133,7 @@ if __name__ == "__main__":
         print("Count of jobs = ", to_do_list.count_job())
         to_do_list.sorting_by_level()
         to_do_list.write_csv("to-do-list.csv")
+        to_do_list.read_csv("to-do-list.csv")
         to_do_list.print_to_do_list()
         to_do_list.clear_list()
     except Exception as e:
