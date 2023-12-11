@@ -96,7 +96,6 @@ class MusicSubscription:
             logger.info(f"Wrote {len(self.users)} users to {file_path}")
 
 
-
 if __name__ == "__main__":
     try:
         # Создание экземпляра класса
