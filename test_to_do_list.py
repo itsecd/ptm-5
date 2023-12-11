@@ -35,7 +35,7 @@ def test_count_job(to_do_list: To_do_list) -> None:
     """
     for i in range(5):
         to_do_list.add_job(f"job-{i+1}", random.randint(1, 11))
-    assert to_do_list.count_job == 5
+    assert to_do_list.count_job() == 5
 
 
 @pytest.mark.parametrize("file", ["test_to_do_list.csv", "nonexistent_file.csv"])
