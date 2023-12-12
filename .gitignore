@@ -8,14 +8,11 @@ __pycache__/
 
 # Distribution / packaging
 .Python
-<<<<<<< HEAD
 /updated_products.csv
 /products.csv
-=======
 /test_product.csv
 /updated_products.csv
 /nonexistent_file.csv
->>>>>>> 35cc3e65f15615821481f604d6a6ac49e9500b1d
 build/
 develop-eggs/
 dist/

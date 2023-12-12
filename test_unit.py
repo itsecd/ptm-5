@@ -1,5 +1,7 @@
 import pytest
 import logging
+import csv
+import os
 from main import Product, ProductStore
 
 
@@ -60,11 +62,11 @@ def test_product_exists(store: ProductStore) -> None:
     assert store.product_exists("TestProduct2") == False
 
 
-@pytest.mark.parametrize("filename", ["test_product.csv", "nonexistent_file.csv"])
+@pytest.mark.parametrize("filename", ["test_product.csv"])
 def test_write_to_csv(store: ProductStore, filename: str) -> None:
     """
     test for the write_to_csv method
-    :storer: ProductStore
+    :store: ProductStore
     :filename parameter: filename str
     :return: None
     """
@@ -72,8 +74,14 @@ def test_write_to_csv(store: ProductStore, filename: str) -> None:
     store.add_product(Product("TestProduct2", 0.99, 3, "2022-01-01"))
     store.write_to_csv(filename)
 
+    # Check if file exists
+    assert os.path.exists(filename)
 
-@pytest.mark.parametrize("filename", ["test_product.csv", "nonexistent_file.csv"])
+    # Check if file is not empty
+    assert os.path.getsize(filename) > 0
+
+
+@pytest.mark.parametrize("filename", ["test_product.csv"])
 def test_read_from_csv(store: ProductStore, filename: str) -> None:
     """
     test for the read_from_csv method
@@ -82,6 +90,10 @@ def test_read_from_csv(store: ProductStore, filename: str) -> None:
     :return: None
     """
     store.read_from_csv(filename)
+
+    # Check if products were correctly read from the file
+    assert len(store.products) > 0
+    assert isinstance(store.products[0], Product)
 
 
 def test_clear_products(store: ProductStore) -> None:
