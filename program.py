@@ -33,11 +33,11 @@ class MultiTree:
 
     def is_empty(self) -> bool:
         """Проверка списка объектов на пустоту"""
-        return True if self.__nodes.count() == 0 else False
+        return True if len(self.__nodes) == 0 else False
 
     def count(self) -> int:
         """Возвращает количество объектов в списке"""
-        return self.__nodes.count()
+        return len(self.__nodes)
 
     def set_value(self, value) -> None:
         """Присваивает переданное зн-е пер-ой __data"""
