@@ -84,3 +84,7 @@ class Monster:
             self.length = self.max_hp + 4
         else:
             self.length = len(self.name) + 1
+
+monster = Monster("with long name", 0, 1,'hit')
+monster.update_data()
+print(monster.name)
