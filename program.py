@@ -14,11 +14,17 @@ class MultiTree:
     
     def append(self, obj: "MultiTree") -> None:
         """Добавление объекта в список"""
-        self.__nodes.append(obj)
+        if type(obj) == MultiTree:
+            self.__nodes.append(obj)
+        else:
+            sys.exit("Переданный объект в функцию 'append' не типа MultiTree")
 
     def find(self, obj: "MultiTree") -> bool:
         """Осуществляет поиск объекта в списке"""
-        return obj in self.__nodes
+        if type(obj) == MultiTree:
+            return obj in self.__nodes
+        else:
+            sys.exit("Переданный объект в функцию 'find' не типа MultiTree")
     
     def __getitem__(self, index: int) -> "MultiTree":
         """Обращение по индексу (исключение вызывается Python"ом)"""
