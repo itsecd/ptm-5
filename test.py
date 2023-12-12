@@ -44,7 +44,7 @@ def test_read_from_csv(manager, file_path):
     manager.read_from_csv(file_path)
 
 
-@pytest.mark.parametrize("file_path", ["test.csv", "nonexistent_file.csv"])
+@pytest.mark.parametrize("file_path", ["clothes.csv", "nonexistent_file.csv"])
 def test_write_to_csv(manager, file_path):
     clothes1 = Clothes("Hoodie", "Gray", "XL", "Palm Anger", "Polyester", 2599)
     clothes2 = Clothes("Hat", "Red", "M", "Adidas", "Wool", 1999)
