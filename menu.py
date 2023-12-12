@@ -1,6 +1,3 @@
-import curses
-
-
 class Menu:
     def __init__(self, window):
         self.title = "default"
@@ -58,7 +55,7 @@ class Menu:
         x = int(round(self.cols/2) - round(titleLength/2))
 
         # draw title
-        self.window.addstr(0, x, self.title, curses.A_BOLD)
+        # self.window.addstr(0, x, self.title, curses.A_BOLD)
 
         # draw spacer
         self.window.addstr(1, 0, "═"*self.cols)
@@ -76,11 +73,11 @@ class Menu:
         self.window.addstr(self.rows-2, 0, self.footer)
 
         # do highlighting
-        for i in range(0, len(self.items)):
-            self.window.chgat(i+2, 0, -1, curses.A_NORMAL)
-        self.window.chgat(self.index+2, 0, -1, curses.A_REVERSE)
-        if self.selected > -1:
-            self.window.chgat(self.selected+2, 0, -1, curses.A_UNDERLINE)
+        # for i in range(0, len(self.items)):
+        # self.window.chgat(i+2, 0, -1, curses.A_NORMAL)
+        # self.window.chgat(self.index+2, 0, -1, curses.A_REVERSE)
+        # if self.selected > -1:
+        # self.window.chgat(self.selected+2, 0, -1, curses.A_UNDERLINE)
 
         # refresh window
         self.window.refresh()
