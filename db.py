@@ -2,8 +2,8 @@ import sqlite3
 
 
 class Database:
-    def __init__(self, db):
-        self.con = sqlite3.connect(db)
+    def __init__(self, data):
+        self.con = sqlite3.connect(data)
         self.cur = self.con.cursor()
         sql = """
         CREATE TABLE IF NOT EXISTS employees(
@@ -44,3 +44,20 @@ class Database:
             "update employees set name=?, age=?, doj=?, email=?, gender=?, contact=?, address=? where id=?",
             (name, age, doj, email, gender, contact, address, idx))
         self.con.commit()
+
+    # Clear all a Record in DB
+    def clear_ALL(self):
+        for i in range(len(self.fetch())):
+            self.remove(i+1)
+        self.con.commit()
+
+    def get_data_ind(self, ind):
+        rows = self.fetch()
+        return rows[ind-1]
+
+    def find_data(self, name):
+        self.cur.execute("SELECT * FROM employees WHERE name LIKE ?", ('%' + name + '%',))
+        rows = self.cur.fetchall()
+        return bool(rows)
+
+
