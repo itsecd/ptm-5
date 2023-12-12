@@ -103,6 +103,3 @@ class TestGame(unittest.TestCase):
                 results()
         self.assertEqual(computer_points, max_rounds)
         self.assertEqual(user_points, 0)
-
-if __name__ == '__main__':
-    unittest.main()
