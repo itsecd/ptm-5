@@ -6,7 +6,6 @@ class Clothes:
     """
     This is class for clothes
     """
-
     def __init__(self, name, color, size, brand, material, price):
         self.name = name
         self.color = color
@@ -20,7 +19,6 @@ class Manager:
     """
     This is class for manager, who manage clothing store
     """
-
     def __init__(self):
         self.clothes_store = []
 

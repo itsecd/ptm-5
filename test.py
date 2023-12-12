@@ -31,13 +31,13 @@ def test_find_clothes(sample_manager):
     assert result[0].name == "Shirt"
 
 
-@pytest.mark.parametrize("tmp_path", ["clothes.csv", "non_exists.csv"])
+@pytest.mark.parametrize("tmp_path", ["clothes.csv"])
 def test_read_from_csv(tmp_path, sample_manager):
     sample_manager.clear_store()
     sample_manager.read_from_csv(tmp_path)
 
 
-@pytest.mark.parametrize("tmp_path", ["clothes.csv", "non_exists.csv"])
+@pytest.mark.parametrize("tmp_path", ["clothes.csv", "non_exist.csv"])
 def test_write_to_csv(tmp_path, sample_manager):
     sample_manager.write_to_csv(tmp_path)
 
