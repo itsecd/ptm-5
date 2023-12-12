@@ -39,7 +39,7 @@ class Manager:
         :return: No return
         """
         for clothess in self.clothes_store:
-            if clothess == clothes:
+            if clothess.name == clothes.name and clothess.brand == clothes.brand and clothess.size == clothes.size:
                 self.clothes_store.remove(clothess)
 
     def display_clothes(self) -> None:
@@ -119,11 +119,15 @@ class Manager:
 if __name__ == "__main__":
     store_manager = Manager()
     print(store_manager.is_null())
-    # store_manager.add_clothes(Clothes("Shirt", "Blue", "L", "Levi's", "Cotton", 1500))
-    # store_manager.add_clothes(Clothes("Trouser", "Black", "30", "Wrangler", "Denim", 1799))
-    # store_manager.add_clothes(Clothes("Trouser", "Brown", "30", "Louis Vuitton", "Denim", 2000))
-    # store_manager.add_clothes(Clothes("Hoodie", "Gray", "XL", "Palm Anger", "Polyester", 2599))
-    # store_manager.add_clothes(Clothes("Hat", "Red", "M", "Adidas", "Wool", 1999))
-    # store_manager.add_clothes(Clothes("Scarf", "Brown", "35", "Gucci", "Silk", 1499))
-    store_manager.read_from_csv("clothes.csv")
+    store_manager.add_clothes(Clothes("Shirt", "Blue", "L", "Levi's", "Cotton", 1500))
+    store_manager.add_clothes(Clothes("Trouser", "Black", "30", "Wrangler", "Denim", 1799))
+    store_manager.add_clothes(Clothes("Trouser", "Brown", "30", "Louis Vuitton", "Denim", 2000))
+    store_manager.add_clothes(Clothes("Hoodie", "Gray", "XL", "Palm Anger", "Polyester", 2599))
+    store_manager.add_clothes(Clothes("Hat", "Red", "M", "Adidas", "Wool", 1999))
+    store_manager.add_clothes(Clothes("Scarf", "Brown", "35", "Gucci", "Silk", 1499))
+    store_manager.write_to_csv("clothes.csv")
+    clothes = Clothes("Trouser", "Brown", "30", "Louis Vuitton", "Denim", 2000)
+    store_manager.display_clothes()
+    store_manager.remove_clothes(clothes)
+    print()
     store_manager.display_clothes()
