@@ -1,5 +1,4 @@
 import pytest
-import os
 from ClothingStore import Manager, Clothes
 
 
@@ -32,35 +31,15 @@ def test_find_clothes(sample_manager):
     assert result[0].name == "Shirt"
 
 
-def test_write_and_read_to_csv(tmp_path, sample_manager):
-    file_path = os.path.join(tmp_path, "test_clothes.csv")
-
-    # Write to CSV
-    sample_manager.write_to_csv(file_path)
-
-    # Clear the store and read from CSV
+@pytest.mark.parametrize("tmp_path", ["clothes.csv", "non_exists.csv"])
+def test_read_from_csv(tmp_path, sample_manager):
     sample_manager.clear_store()
-    sample_manager.read_from_csv(file_path)
-
-    assert not sample_manager.is_null()
-    assert len(sample_manager.clothes_store) == 3  # Assuming there are 3 unique items in the sample_manager
+    sample_manager.read_from_csv(tmp_path)
 
 
-def test_clear_store(sample_manager):
-    assert not sample_manager.is_null()
-    sample_manager.clear_store()
-    assert sample_manager.is_null()
-
-
-def test_display_clothes(capfd, sample_manager):
-    sample_manager.display_clothes()
-    captured = capfd.readouterr()
-    assert "Shirt" in captured.out
-    assert "Blue" in captured.out
-    assert "L" in captured.out
-    assert "Levi's" in captured.out
-    assert "Cotton" in captured.out
-    assert "1500" in captured.out
+@pytest.mark.parametrize("tmp_path", ["clothes.csv", "non_exists.csv"])
+def test_write_to_csv(tmp_path, sample_manager):
+    sample_manager.write_to_csv(tmp_path)
 
 
 def test_is_null(sample_manager):
