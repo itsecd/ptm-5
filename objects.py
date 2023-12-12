@@ -47,7 +47,7 @@ class Splash(pygame.sprite.Sprite):
 		def __init__(self, x, y, win):
 			super(Splash, self).__init__()
 			self.win = win
-			self.image = pygame.image.load('Assets/splash.png')
+			self.image = pygame.image.load('splash.png')
 			self.image = pygame.transform.scale(self.image, (80,60))
 			self.rect = self.image.get_rect()
 			self.rect.x = x
