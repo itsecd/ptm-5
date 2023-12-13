@@ -1,0 +1,18 @@
+; Attributes: bp-based frame fuzzy-sp
+
+; int __cdecl main(int argc, const char **argv, const char **envp)
+public main
+main proc near
+
+var_30= byte ptr -30h
+
+push    rbp
+mov     rbp, rsp
+sub     rsp, 50h
+and     rsp, 0FFFFFFFFFFFFFFF0h
+lea     rcx, [rbp+var_30]
+call    gets
+leave
+xor     rax, rax
+retn
+main endp
