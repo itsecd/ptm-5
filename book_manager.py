@@ -1,5 +1,6 @@
 books = []
 
+# Функция для добавления книги
 def add_book(title, author, pages, release_date, cost, genre):
     book = {
         'title': title,
@@ -11,16 +12,20 @@ def add_book(title, author, pages, release_date, cost, genre):
     }
     books.append(book)
 
+# Функция для удаления книги
 def remove_book(title):
     global books
     books = [book for book in books if book['title'] != title]
 
+# Функция для сортировки книг по новизне
 def sort_by_release_date():
     return sorted(books, key=lambda x: x['release_date'], reverse=True)
 
+# Функция для сортировки книг по количеству страниц
 def sort_by_pages():
     return sorted(books, key=lambda x: x['pages'])
 
+# Функция для группировки книг по жанрам
 def group_by_genre():
     genres = {}
     for book in books:
@@ -28,48 +33,23 @@ def group_by_genre():
         genres[genre] = genres.get(genre, 0) + 1
     return genres
 
+# Функция для расчета, сколько книг и сколько можно будет купить имея на руках N денег
 def count_books_affordable(amount):
     return [book for book in books if book['cost'] <= amount]
 
-def print_menu():
-    print("1. Add a book")
-    print("2. Remove a book")
-    print("3. Sort by release date")
-    print("4. Sort by pages")
-    print("5. Group by genre")
-    print("6. Count books affordable")
-    print("0. Exit")
-
 # Пример использования функций
-while True:
-    print_menu()
-    choice = input("Enter your choice (0-6): ")
+add_book('Book1', 'Author1', 300, '2022-01-01', 20.0, 'Fiction')
+add_book('Book2', 'Author2', 250, '2022-02-15', 15.0, 'Mystery')
+add_book('Book3', 'Author3', 400, '2022-03-20', 25.0, 'Fantasy')
 
-    if choice == "0":
-        print("Goodbye!")
-        break
-    elif choice == "1":
-        title = input("Enter book title: ")
-        author = input("Enter author name: ")
-        pages = int(input("Enter number of pages: "))
-        release_date = input("Enter release date (YYYY-MM-DD): ")
-        cost = float(input("Enter cost: "))
-        genre = input("Enter genre: ")
-        add_book(title, author, pages, release_date, cost, genre)
-    elif choice == "2":
-        title = input("Enter the title of the book to remove: ")
-        remove_book(title)
-    elif choice == "3":
-        print("Books sorted by release date:")
-        print(sort_by_release_date())
-    elif choice == "4":
-        print("Books sorted by pages:")
-        print(sort_by_pages())
-    elif choice == "5":
-        print("Books grouped by genre:")
-        print(group_by_genre())
-    elif choice == "6":
-        amount = float(input("Enter the amount of money you have: "))
-        print("Books affordable with ${}: {}".format(amount, count_books_affordable(amount)))
-    else:
-        print("Invalid choice. Please enter a number between 0 and 6.")
+print("Books sorted by release date:")
+print(sort_by_release_date())
+
+print("\nBooks sorted by pages:")
+print(sort_by_pages())
+
+print("\nBooks grouped by genre:")
+print(group_by_genre())
+
+print("\nBooks affordable with $30:")
+print(count_books_affordable(30.0))

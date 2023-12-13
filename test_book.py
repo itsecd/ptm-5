@@ -1,111 +1,121 @@
-import pytest
-from datetime import date
-
-# Это ваш код, который я импортирую для тестирования
+# импортируем модуль, который мы хотим протестировать
 import book_manager
 
-# Это фикстура, которая создает список книг для тестирования
+# импортируем pytest и mock для создания моков и стабов
+import pytest
+from unittest import mock
+
+# создаем фикстуру, которая будет очищать список книг перед каждым тестом
+@pytest.fixture(autouse=True)
+def clear_books():
+    book_manager.books.clear()
+
+# создаем фикстуру, которая будет добавлять несколько книг в список для тестирования
 @pytest.fixture
-def books():
-    return [
-        {
-            'title': 'The Catcher in the Rye',
-            'author': 'J.D. Salinger',
-            'pages': 277,
-            'release_date': date(1951, 7, 16),
-            'cost': 10.99,
-            'genre': 'Novel'
-        },
-        {
-            'title': 'The Hitchhiker\'s Guide to the Galaxy',
-            'author': 'Douglas Adams',
-            'pages': 180,
-            'release_date': date(1979, 10, 12),
-            'cost': 5.99,
-            'genre': 'Science Fiction'
-        },
-        {
-            'title': 'The Lord of the Rings',
-            'author': 'J.R.R. Tolkien',
-            'pages': 1216,
-            'release_date': date(1954, 7, 29),
-            'cost': 19.99,
-            'genre': 'Fantasy'
-        }
-    ]
+def sample_books():
+    book_manager.add_book('Book1', 'Author1', 300, '2022-01-01', 20.0, 'Fiction')
+    book_manager.add_book('Book2', 'Author2', 250, '2022-02-15', 15.0, 'Mystery')
+    book_manager.add_book('Book3', 'Author3', 400, '2022-03-20', 35.0, 'Fantasy')
 
-# Это тест, который проверяет, что функция add_book добавляет книгу в список books
-def test_add_book(books):
-    # Это книга, которую я хочу добавить
-    book = {
-        'title': 'Harry Potter and the Philosopher\'s Stone',
-        'author': 'J.K. Rowling',
-        'pages': 223,
-        'release_date': date(1997, 6, 26),
-        'cost': 9.99,
-        'genre': 'Fantasy'
-    }
-    # Это вызов функции add_book с книгой в качестве аргумента
-    book_manager.add_book(book['title'], book['author'], book['pages'], book['release_date'], book['cost'], book['genre'])
-    # Это утверждение, которое проверяет, что книга добавлена в список books
-    assert book in book_manager.books
+# тестируем функцию добавления книги
+def test_add_book():
+    # проверяем, что список книг пустой
+    assert len(book_manager.books) == 0
+    # добавляем книгу
+    book_manager.add_book('Book4', 'Author4', 350, '2022-04-01', 18.0, 'Romance')
+    # проверяем, что список книг содержит одну книгу
+    assert len(book_manager.books) == 1
+    # проверяем, что книга имеет правильные атрибуты
+    book = book_manager.books[0]
+    assert book['title'] == 'Book4'
+    assert book['author'] == 'Author4'
+    assert book['pages'] == 350
+    assert book['release_date'] == '2022-04-01'
+    assert book['cost'] == 18.0
+    assert book['genre'] == 'Romance'
 
-# Это тест, который проверяет, что функция remove_book удаляет книгу из списка books по названию
-def test_remove_book(books):
-    # Это название книги, которую я хочу удалить
-    title = 'The Catcher in the Rye'
-    # Это вызов функции remove_book с названием в качестве аргумента
-    book_manager.remove_book(title)
-    # Это утверждение, которое проверяет, что книга удалена из списка books
-    assert title not in [book['title'] for book in book_manager.books]
+# тестируем функцию удаления книги
+def test_remove_book(sample_books):
+    # проверяем, что список книг содержит три книги
+    assert len(book_manager.books) == 3
+    # удаляем книгу
+    book_manager.remove_book('Book2')
+    # проверяем, что список книг содержит две книги
+    assert len(book_manager.books) == 2
+    # проверяем, что книга была удалена
+    titles = [book['title'] for book in book_manager.books]
+    assert 'Book2' not in titles
 
-# Это тест, который проверяет, что функция sort_by_release_date сортирует список books по дате выпуска в обратном порядке
-def test_sort_by_release_date(books):
-    # Это вызов функции sort_by_release_date
+# тестируем функцию сортировки книг по новизне
+def test_sort_by_release_date(sample_books):
+    # сортируем книги по дате выпуска
     sorted_books = book_manager.sort_by_release_date()
-    # Это утверждение, которое проверяет, что список books отсортирован по дате выпуска в обратном порядке
-    assert sorted_books == [books[2], books[1], books[0]]
+    # проверяем, что книги отсортированы в правильном порядке
+    assert sorted_books[0]['title'] == 'Book3'
+    assert sorted_books[1]['title'] == 'Book2'
+    assert sorted_books[2]['title'] == 'Book1'
 
-# Это тест, который проверяет, что функция sort_by_pages сортирует список books по количеству страниц
-def test_sort_by_pages(books):
-    # Это вызов функции sort_by_pages
+# тестируем функцию сортировки книг по количеству страниц
+def test_sort_by_pages(sample_books):
+    # сортируем книги по количеству страниц
     sorted_books = book_manager.sort_by_pages()
-    # Это утверждение, которое проверяет, что список books отсортирован по количеству страниц
-    assert sorted_books == [books[1], books[0], books[2]]
+    # проверяем, что книги отсортированы в правильном порядке
+    assert sorted_books[0]['title'] == 'Book2'
+    assert sorted_books[1]['title'] == 'Book1'
+    assert sorted_books[2]['title'] == 'Book3'
 
-# Это тест, который проверяет, что функция group_by_genre группирует список books по жанру и возвращает словарь с количеством книг в каждом жанре
-def test_group_by_genre(books):
-    # Это вызов функции group_by_genre
+# тестируем функцию группировки книг по жанрам
+def test_group_by_genre(sample_books):
+    # группируем книги по жанрам
     genres = book_manager.group_by_genre()
-    # Это утверждение, которое проверяет, что функция group_by_genre возвращает правильный словарь с жанрами и количеством книг
-    assert genres == {'Novel': 1, 'Science Fiction': 1, 'Fantasy': 2}
+    # проверяем, что получили правильный словарь
+    assert genres == {'Fiction': 1, 'Mystery': 1, 'Fantasy': 1}
 
-# Это тест, который проверяет, что функция count_books_affordable возвращает список книг, которые стоят не больше заданной суммы
-def test_count_books_affordable(books):
-    # Это сумма, которую я хочу использовать для тестирования
-    amount = 15.00
-    # Это вызов функции count_books_affordable с суммой в качестве аргумента
-    affordable_books = book_manager.count_books_affordable(amount)
-    # Это утверждение, которое проверяет, что функция count_books_affordable возвращает правильный список книг
-    assert affordable_books == [books[0], books[1]]
+# тестируем функцию расчета, сколько книг можно купить на заданную сумму
+def test_count_books_affordable(sample_books):
+    # проверяем, сколько книг можно купить на $30
+    affordable_books = book_manager.count_books_affordable(30.0)
+    # проверяем, что получили две книги
+    assert len(affordable_books) == 2
+    # проверяем, что это правильные книги
+    titles = [book['title'] for book in affordable_books]
+    assert 'Book1' in titles
+    assert 'Book2' in titles
 
-# Это параметризованный тест, который проверяет, что функция print_menu выводит правильное меню на экран
-@pytest.mark.parametrize('choice, expected', [
-    ('0', 'Goodbye!'),
-    ('1', 'Enter book title: '),
-    ('2', 'Enter the title of the book to remove: '),
-    ('3', 'Books sorted by release date:'),
-    ('4', 'Books sorted by pages:'),
-    ('5', 'Books grouped by genre:'),
-    ('6', 'Enter the amount of money you have: '),
-    ('7', 'Invalid choice. Please enter a number between 0 and 6.')
+# тестируем функцию добавления книги с использованием параметризации
+# для проверки разных входных данных
+@pytest.mark.parametrize('title, author, pages, release_date, cost, genre', [
+    ('Book5', 'Author5', 200, '2022-05-01', 10.0, 'Horror'),
+    ('Book6', 'Author6', 450, '2022-06-01', 30.0, 'Sci-Fi'),
+    ('Book7', 'Author7', 100, '2022-07-01', 5.0, 'Comedy')
 ])
-def test_print_menu(choice, expected, capsys, monkeypatch):
-    # Это подмена ввода пользователя на заданный выбор
-    monkeypatch.setattr('builtins.input', lambda _: choice)
-    # Это вызов основного цикла программы
-    book_manager.main()
-    # Это захват вывода на экран
-    captured = capsys.readouterr()
-    # Это утверждение, которое проверяет, что функция print выводит ожидаемый текст
-    assert expected in captured.out
+def test_add_book_parametrized(title, author, pages, release_date, cost, genre):
+    # проверяем, что список книг пустой
+    assert len(book_manager.books) == 0
+    # добавляем книгу с параметрами
+    book_manager.add_book(title, author, pages, release_date, cost, genre)
+    # проверяем, что список книг содержит одну книгу
+    assert len(book_manager.books) == 1
+    # проверяем, что книга имеет правильные атрибуты
+    book = book_manager.books[0]
+    assert book['title'] == title
+    assert book['author'] == author
+    assert book['pages'] == pages
+    assert book['release_date'] == release_date
+    assert book['cost'] == cost
+    assert book['genre'] == genre
+
+# тестируем функцию удаления книги с использованием мока
+# для подмены глобальной переменной books
+# Тест, который использует настоящий список книг вместо мока
+def test_remove_book_real():
+    # добавляем книгу в список книг
+    book_manager.add_book('Book8', 'Author8', 500, '2022-08-01', 40.0, 'Thriller')
+    # проверяем, что список книг содержит одну книгу
+    assert len(book_manager.books) == 1
+    # удаляем книгу
+    book_manager.remove_book('Book8')
+    # проверяем, что список книг пустой
+    assert len(book_manager.books) == 0
+
+
