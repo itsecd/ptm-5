@@ -60,4 +60,9 @@ class Database:
         rows = self.cur.fetchall()
         return bool(rows)
 
+    def data_is_null(self):
+        if len(self.fetch()) == 0:
+            return True
+        return False
+
 
