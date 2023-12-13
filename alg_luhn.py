@@ -15,8 +15,8 @@ def alg_luhn(number: str) -> bool:
         else:
             summa += int(number[index])
     if summa % 10 == 0:
-        logger.info("The lunch algorithm was successful. The card number is correct")
+        # logger.info("The lunch algorithm was successful. The card number is correct")
         return True
     else:
-        logger.warning("The sequence failed the luhn check. Check it out")
+        # logger.warning("The sequence failed the luhn check. Check it out")
         return False

@@ -12,7 +12,7 @@ import alg_luhn
 import gen_num
 import graph
 import read_settings
-
+logger = my_logger.My_log(__file__).get_logger()
 
 class Window(QMainWindow):
     """Основной класс нашей програмы"""
@@ -166,6 +166,7 @@ class Window(QMainWindow):
 
 def application() -> None:
     """"Start aplication mainwindow"""
+
     app = QApplication(sys.argv)
     window = Window()
     window.setObjectName("MainWindow")
@@ -189,6 +190,6 @@ if __name__ == "__main__":
     # file_handler.setFormatter(formatter)
     # logger.addHandler(console_handler)
     # logger.addHandler(file_handler)
-    logger = my_logger.My_log(__file__).get_logger()
+
     application()
 

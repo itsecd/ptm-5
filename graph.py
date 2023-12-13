@@ -9,7 +9,9 @@ def show_plt(cores: list, times: list) -> None:
     else:
         logger = my_logger.My_log(__file__).get_logger()
         logger.error("Plotting is not possible. Different number of points")
+        return False
     plt.xlabel("ядра, шт")
     plt.ylabel("Время, сек")
     plt.show()
+    return True
 
