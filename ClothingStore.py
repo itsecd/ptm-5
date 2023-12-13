@@ -108,10 +108,20 @@ class Manager:
 
     def clear_store(self) -> None:
         """
-        Remove all of clothes in store
-        :return:
+        Remove all clothes in store
+        :return: No return
         """
         self.clothes_store = []
+
+    def check_big_store(self) -> bool:
+        """
+        Check store is small or big
+        :return: If total price products > 20000 so is big (True), and opposite is small(False)
+        """
+        total = 0.0
+        for clothes in self.clothes_store:
+            total += clothes.price
+        return total > 20000.0
 
 
 if __name__ == "__main__":

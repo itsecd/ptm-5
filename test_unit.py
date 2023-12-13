@@ -46,3 +46,15 @@ def test_is_null(sample_manager):
     sample_manager.clear_store()
     result = sample_manager.is_null()
     assert result is True
+
+
+def test_check_big_store(sample_manager):
+    sample_manager = Manager()
+    sample_manager.read_from_csv("clothes.csv")
+    sample_manager.read_from_csv("clothes.csv")
+    sample_manager.read_from_csv("clothes.csv")
+    sample_manager.read_from_csv("clothes.csv")
+    sample_manager.read_from_csv("clothes.csv")
+    sample_manager.read_from_csv("clothes.csv")
+    result = sample_manager.check_big_store()
+    assert result is True
