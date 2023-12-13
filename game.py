@@ -21,7 +21,6 @@ def intro():
     sleep(2)  # Making program to sleep to execute next part of the program after sometime
 
 
-intro()  # Calling the function intro() to introduce the game
 
 computer_choice, user_choice = "", ""  # Declaring variables to store choices
 computer_points, user_points, flag, chance = 0, 0, 0, 0  # Variables :
@@ -120,45 +119,54 @@ def replay_game():
             continue  # executing the loop again due to invalid input given by the user
 
 
-while 1:  # Infinite loop to play the game as many times as the user wants
-    computer_points, user_points, flag, chance = 0, 0, 0, 0  # Initialising values to zero at the beginning of the game
-    computer_choice, user_choice, replay = "", "", ""  # Emptying strings at the beginning of the game
 
-    try:
-        n = int(input("HOW MANY CHANCES DO YOU WANT TO PLAY ?\n"))
-        if n < 1:
+        
+def main():
+    
+    while True:
+        intro()
+        computer_points, user_points, flag, chance = 0, 0, 0, 0  # Initialising values to zero at the beginning of the game
+        computer_choice, user_choice, replay = "", "", ""  # Emptying strings at the beginning of the game
+
+        try:
+            n = int(input("HOW MANY CHANCES DO YOU WANT TO PLAY ?\n"))
+            if n < 1:
+                print(red('Please enter only natural number', 'bold'))
+                continue
+
+        except Exception as e:
             print(red('Please enter only natural number', 'bold'))
             continue
 
-    except Exception as e:
-        print(red('Please enter only natural number', 'bold'))
-        continue
+        while chance < n:  # Iterating loop 'n' times for playing 'n' number of chances
+            choices()  # Calling function to take choice of the user as input
+            results()  # Calling function to calculate result of a particular chance
+            if flag == 0:  # Incrementing flag's value only if the input given by the user will be valid
+                chance += 1
 
-    while chance < n:  # Iterating loop 'n' times for playing 'n' number of chances
-        choices()  # Calling function to take choice of the user as input
-        results()  # Calling function to calculate result of a particular chance
-        if flag == 0:  # Incrementing flag's value only if the input given by the user will be valid
-            chance += 1
+        # Displaying points of both computer and user
+        print("\n\t\t\tYOUR SCORE :", user_points)
+        print("\n\t\t\tCOMPUTER'S SCORE :", computer_points)
 
-    # Displaying points of both computer and user
-    print("\n\t\t\tYOUR SCORE :", user_points)
-    print("\n\t\t\tCOMPUTER'S SCORE :", computer_points)
+        # Printing the final result of the game
+        if computer_points > user_points:
+            print(red("\n\t\t\tYOU LOST THE GAME !!"), emojize(":loudly_crying_face:"), red("YOU LOST THE GAME"))
+        elif user_points > computer_points:
+            print(green("\n\t\t\tHURRAH !!"), emojize(":smiling_face_with_sunglasses:"), green("YOU WON THE GAME"))
+        else:
+            print(yellow("\n\t\t\t!! TIE !!"), emojize(":disappointed_face:"), yellow("!! TRY AGAIN !!"))
 
-    # Printing the final result of the game
-    if computer_points > user_points:
-        print(red("\n\t\t\tYOU LOST THE GAME !!"), emojize(":loudly_crying_face:"), red("YOU LOST THE GAME"))
-    elif user_points > computer_points:
-        print(green("\n\t\t\tHURRAH !!"), emojize(":smiling_face_with_sunglasses:"), green("YOU WON THE GAME"))
-    else:
-        print(yellow("\n\t\t\t!! TIE !!"), emojize(":disappointed_face:"), yellow("!! TRY AGAIN !!"))
+        replay = ""
 
-    replay = ""
+        replay_game()
 
-    replay_game()
-
-    if replay == "n" or replay == "no":
-        print(red("\n\t\t\tSAD TO SEE YOU GO !!", 'bold'), emojize(":disappointed_face:"))  # Printing exit statement
-        exit()  # exiting the game
-    if replay == "y" or replay == "yes":
-        print(green("\n\t\t\tYO LET'S PLAY AGAIN", 'bold'), emojize(":smiling_face_with_smiling_eyes:"))
-        # Printing a statement and replaying the game
+        if replay == "n" or replay == "no":
+            print(red("\n\t\t\tSAD TO SEE YOU GO !!", 'bold'), emojize(":disappointed_face:"))  # Printing exit statement
+            exit()  # exiting the game
+        if replay == "y" or replay == "yes":
+            print(green("\n\t\t\tYO LET'S PLAY AGAIN", 'bold'), emojize(":smiling_face_with_smiling_eyes:"))
+            # Printing a statement and replaying the game
+        
+if __name__ == '__main__':
+    main()
+    

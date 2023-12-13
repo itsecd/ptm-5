@@ -4,6 +4,10 @@ from game import results
 
 class TestGame(unittest.TestCase):
     
+    def setUp(self):
+        global user_points, computer_points
+        user_points, computer_points = 0, 0
+        
     @patch('game.computer_choice', 'Snake')
     @patch('game.user_choice', 's')
     def test_result_draw_snake(self):
@@ -103,3 +107,6 @@ class TestGame(unittest.TestCase):
                 results()
         self.assertEqual(computer_points, max_rounds)
         self.assertEqual(user_points, 0)
+
+if __name__ == '__main__':
+    unittest.main()
