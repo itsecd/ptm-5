@@ -62,14 +62,13 @@ def test_product_exists(store: ProductStore) -> None:
     assert store.product_exists("TestProduct2") == False
 
 
-@pytest.mark.parametrize("filename", ["test_product.csv"])
-def test_write_to_csv(store: ProductStore, filename: str) -> None:
+def test_write_to_csv(store: ProductStore) -> None:
     """
-    test for the write_to_csv method
+    test for the write_to_csv method without parameterization
     :store: ProductStore
-    :filename parameter: filename str
     :return: None
     """
+    filename = "test_product.csv"
     store.add_product(Product("TestProduct1", 1.00, 10, "2023-01-01"))
     store.add_product(Product("TestProduct2", 0.99, 3, "2022-01-01"))
     store.write_to_csv(filename)
@@ -81,14 +80,13 @@ def test_write_to_csv(store: ProductStore, filename: str) -> None:
     assert os.path.getsize(filename) > 0
 
 
-@pytest.mark.parametrize("filename", ["test_product.csv"])
-def test_read_from_csv(store: ProductStore, filename: str) -> None:
+def test_read_from_csv(store: ProductStore) -> None:
     """
-    test for the read_from_csv method
+    test for the read_from_csv method without parameterization
     :store: ProductStore
-    :filename parameter: filename str
     :return: None
     """
+    filename = "test_product.csv"
     store.read_from_csv(filename)
 
     # Check if products were correctly read from the file
