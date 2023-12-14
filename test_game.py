@@ -21,7 +21,7 @@ def reset_game_state(monkeypatch):
     ('Water', 'g', 0, 1), 
     ('Gun', 's', 0, 1),  
 ])
-def test_game_results(computer_choice, user_choice, exp_user_points, exp_comp_points, monkeypatch):
+def test_game_results(comp_choice, user_input, exp_user_points, exp_comp_points, monkeypatch):
     """тестирование различных сценариев игры и проверка очков
 
     Args:
@@ -30,8 +30,8 @@ def test_game_results(computer_choice, user_choice, exp_user_points, exp_comp_po
         exp_user_points (_type_): ожидаемое количество очков пользователя
         exp_comp_points (_type_): ожидаемое количество очков компьютера
     """
-    monkeypatch.setattr('game.computer_choice', computer_choice)
-    monkeypatch.setattr('game.user_choice', user_choice)
+    monkeypatch.setattr('game.computer_choice', comp_choice)
+    monkeypatch.setattr('game.user_choice', user_input)
     
     results()
     assert user_points == exp_user_points
