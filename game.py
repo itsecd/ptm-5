@@ -122,9 +122,9 @@ def replay_game():
 
         
 def main():
-    
+    global computer_points, user_points, flag # Initialising values to zero at the beginning of the game
     while True:
-        global computer_points, user_points, flag = 0, 0, 0  # Initialising values to zero at the beginning of the game
+        computer_points, user_points, flag = 0, 0, 0
         intro()
         computer_choice, user_choice, replay = "", "", ""  # Emptying strings at the beginning of the game
 
