@@ -14,12 +14,12 @@ def reset_game_state(monkeypatch):
     ('Snake', 's', 0, 0), 
     ('Water', 'w', 0, 0),
     ('Gun', 'g', 0, 0),   
-    ('Snake', 'g', 0, 1),
-    ('Water', 's', 0, 1), 
-    ('Gun', 'w', 0, 1),   
-    ('Snake', 'w', 1, 0), 
-    ('Water', 'g', 1, 0), 
-    ('Gun', 's', 1, 0),  
+    ('Snake', 'g', 1, 0),
+    ('Water', 's', 1, 0), 
+    ('Gun', 'w', 1, 0),   
+    ('Snake', 'w', 0, 1), 
+    ('Water', 'g', 0, 1), 
+    ('Gun', 's', 0, 1),  
 ])
 def test_game_results(comp_choice, user_input, exp_user_points, exp_comp_points, monkeypatch):
     """тестирование различных сценариев игры и проверка очков
@@ -39,6 +39,7 @@ def test_game_results(comp_choice, user_input, exp_user_points, exp_comp_points,
 
 def test_maximum_score(monkeypatch):
     """проверка на максимальное значение очков
+
     """
     max_rounds = 5
     monkeypatch.setattr('game.computer_choice', 'Gun')
