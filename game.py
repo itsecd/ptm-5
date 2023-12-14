@@ -33,7 +33,6 @@ def choices():
     """
     This function takes input of user's choice and also takes random input from the computer from list 'options'
     """
-    global computer_choice, user_choice  # Declaring variables as global to use in function
     options = ["Snake", "Water", "Gun"]  # List of options for computer to choose randomly
     computer_choice = random.choice(options)  # function to store random choice from list 'options'
 
@@ -41,9 +40,10 @@ def choices():
           "\t\tW for", emojize(":droplet:"),
           "\t\tG for", emojize(":pistol:"))  # Printing options for user to select
     user_choice = input().lower()  # storing input of the user in lower case
+    return computer_choice, user_choice
 
 
-def results():
+def results(computer_choice, user_choice):
     """
     This function calculates points of both computer and user and
      it also prints whether the user won or lost in that chance and flag value is also handled in this function
@@ -124,8 +124,8 @@ def replay_game():
 def main():
     
     while True:
+        global computer_points, user_points, flag = 0, 0, 0  # Initialising values to zero at the beginning of the game
         intro()
-        computer_points, user_points, flag, chance = 0, 0, 0, 0  # Initialising values to zero at the beginning of the game
         computer_choice, user_choice, replay = "", "", ""  # Emptying strings at the beginning of the game
 
         try:
@@ -139,8 +139,8 @@ def main():
             continue
 
         while chance < n:  # Iterating loop 'n' times for playing 'n' number of chances
-            choices()  # Calling function to take choice of the user as input
-            results()  # Calling function to calculate result of a particular chance
+            computer_choice, user_choice = choices()  # Calling function to take choice of the user as input
+            results(computer_choice, user_choice)  # Calling function to calculate result of a particular chance
             if flag == 0:  # Incrementing flag's value only if the input given by the user will be valid
                 chance += 1
 
