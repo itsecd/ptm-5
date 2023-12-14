@@ -33,7 +33,7 @@ def test_game_results(comp_choice, user_input, exp_user_points, exp_comp_points,
     monkeypatch.setattr('game.computer_choice', comp_choice)
     monkeypatch.setattr('game.user_choice', user_input)
     
-    results()
+    results(comp_choice, user_input)
     assert user_points == exp_user_points
     assert computer_points == exp_comp_points
 
@@ -45,6 +45,6 @@ def test_maximum_score(monkeypatch):
     monkeypatch.setattr('game.computer_choice', 'Gun')
     monkeypatch.setattr('game.user_choice', 's')
     for _ in range(max_rounds):
-        results()
+        results('Gun', 's')
     assert computer_points == max_rounds
     assert user_points == 0
