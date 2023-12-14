@@ -28,6 +28,8 @@ class ClientJournal:
             if client['name'] == old_name and client['surname'] == old_surname:
                 client['name'] = new_name
                 client['surname'] = new_surname
+                return True
+        return False
 
     def change_subscription_duration(self, name: str, surname: str, new_duration: int) -> None:
         '''
@@ -36,6 +38,8 @@ class ClientJournal:
         for client in self.clients:
             if client['name'] == name and client['surname'] == surname:
                 client['subscription_duration'] = new_duration
+                return True
+        return False
 
     def check_client_existence(self, name: str, surname: str) -> bool:
         '''
@@ -67,6 +71,8 @@ class ClientJournal:
         for client in self.clients:
             if client['name'] == name and client['surname'] == surname:
                 self.clients.remove(client)
+                return True
+        return False
 
     def sort_clients_by_name(self) -> None:
         '''
