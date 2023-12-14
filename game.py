@@ -21,7 +21,7 @@ def intro():
     sleep(2)  # Making program to sleep to execute next part of the program after sometime
 
 
-
+global computer_points, user_points, flag
 computer_choice, user_choice = "", ""  # Declaring variables to store choices
 computer_points, user_points, flag, chance = 0, 0, 0, 0  # Variables :
 # store points, flag = to repeat loop once again for invalid input,
@@ -47,8 +47,7 @@ def results(computer_choice, user_choice):
     """
     This function calculates points of both computer and user and
      it also prints whether the user won or lost in that chance and flag value is also handled in this function
-    """
-    global computer_points, user_points, flag  # Globalising variables for editing it's values
+    """ 
     flag = 0  # Initialising the value of flag to zero in each iteration
     if computer_choice == "Snake":
         if user_choice == "s" or user_choice == "snake":
@@ -122,7 +121,6 @@ def replay_game():
 
         
 def main():
-    global computer_points, user_points, flag # Initialising values to zero at the beginning of the game
     while True:
         computer_points, user_points, flag = 0, 0, 0
         intro()
