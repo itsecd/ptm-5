@@ -163,7 +163,7 @@ class Coins(pygame.sprite.Sprite):
 
 		self.images = []
 		for i in range(1, 7):
-			img = pygame.image.load(f'Assets/Coins/{i}.png')
+			img = pygame.image.load(f'Assets/coins/{i}.png')
 			self.images.append(img)
 
 		self.counter = 0
