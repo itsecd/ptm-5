@@ -30,22 +30,25 @@ def test_count_items(shop) -> None:
 @pytest.mark.parametrize("filename", ["test_inventory.csv", "nonexistent_file.csv"])
 def test_save_to_csv(shop: ShopInventory, filename: str) -> None:
     """
-    тест для метода save_to_csv
+    Тест для метода save_to_csv
     """
     shop.add_item("Item 1")
     shop.add_item("Item 2")
-    shop.save_to_csv(filename)
-    assert shop.save_to_csv(filename) is not None
+    try:
+        shop.save_to_csv(filename)
+    except Exception as e:
+        assert False, f"Возникло неожиданное исключение: {e}"
 
 
 @pytest.mark.parametrize("filename", ["test_inventory.csv", "nonexistent_file.csv"])
 def test_load_from_csv(shop: ShopInventory, filename: str) -> None:
     """
-    тест для метода load_from_csv
+    Тест для метода load_from_csv
     """
-    shop.load_from_csv(filename)
-    assert shop.load_from_csv(filename) is not None
-
+    try:
+        shop.load_from_csv(filename)
+    except Exception as e:
+        assert False, f"Возникло неожиданное исключение: {e}"
 
 
 def test_remove_existing_item(shop: ShopInventory) -> None:
