@@ -33,7 +33,7 @@ class StudentJournal:
         attended_lectures,
         total_lectures,
         passed_exam,
-    ):
+    ) -> None:
         new_student = {
             "id": student_id,
             "date_of_birth": date_of_birth,
@@ -45,7 +45,7 @@ class StudentJournal:
         self.students.append(new_student)
         logger.info(f"Client added: {student_id}")
 
-    def remove_student(self, student_id):
+    def remove_student(self, student_id) -> bool:
         for student in self.students:
             if student["id"] == student_id:
                 self.students.remove(student)
@@ -54,15 +54,15 @@ class StudentJournal:
             logger.warning(f"Removal failed for {student_id}")
             return False
 
-    def sort_by_average_grade(self, reverse=True):
+    def sort_by_average_grade(self, reverse=True) -> None:
         self.students.sort(key=lambda x: x["average_grade"], reverse=reverse)
         logger.info(f"Clients sorted by average grade (reverse = {reverse})")
 
-    def sort_by_attended_lectures(self, reverse=True):
+    def sort_by_attended_lectures(self, reverse=True) -> None:
         self.students.sort(key=lambda x: x["attended_lectures"], reverse=reverse)
         logger.info(f"Clients sorted by attended lectures (reverse = {reverse})")
 
-    def is_allowed_to_exam(self, student_id):
+    def is_allowed_to_exam(self, student_id) -> bool:
         for student in self.students:
             if student["id"] == student_id:
                 if (
@@ -78,7 +78,7 @@ class StudentJournal:
         logger.warning(f"Removal failed for {student_id}")
         return False
 
-    def update_average_grade(self, student_id, new_grade):
+    def update_average_grade(self, student_id, new_grade) -> bool:
         for student in self.students:
             if student["id"] == student_id:
                 student["average_grade"] = new_grade
@@ -87,7 +87,7 @@ class StudentJournal:
             logging.info(f"{student_id} average score has not been corrected")
             return False
 
-    def read_from_csv(self, filename):
+    def read_from_csv(self, filename) -> None:
         try:
             with open(filename, "r") as file:
                 reader = csv.DictReader(file)
@@ -96,10 +96,8 @@ class StudentJournal:
             logger.info(f"Clients read from CSV file: {filename}")
         except Exception as e:
             logger.error(f"Error reading from CSV file: {filename} - {e}")
-        
 
-
-    def write_to_csv(self, filename):
+    def write_to_csv(self, filename) -> None:
         try:
             with open(filename, "w", newline="") as file:
                 fieldnames = [
