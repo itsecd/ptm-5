@@ -35,6 +35,7 @@ def test_save_to_csv(shop: ShopInventory, filename: str) -> None:
     shop.add_item("Item 1")
     shop.add_item("Item 2")
     shop.save_to_csv(filename)
+    assert shop.save_to_csv(filename) is not None
 
 
 @pytest.mark.parametrize("filename", ["test_inventory.csv", "nonexistent_file.csv"])
@@ -43,6 +44,8 @@ def test_load_from_csv(shop: ShopInventory, filename: str) -> None:
     тест для метода load_from_csv
     """
     shop.load_from_csv(filename)
+    assert shop.load_from_csv(filename) is not None
+
 
 
 def test_remove_existing_item(shop: ShopInventory) -> None:
