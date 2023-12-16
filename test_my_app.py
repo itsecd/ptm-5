@@ -7,23 +7,24 @@ import main_window
 import alg_luhn, graph, read_settings, gen_num, write_result
 
 
-# @pytest.fixture
-# def app(qtbot) -> main_window.Window:
-#
-#     my_app = main_window.Window()
-#     qtbot.addWidget(my_app)
-#     return my_app
-#
-#
-# def test_start(app):
-#     app.variant_label = '5'
-#     assert app.variant_label.text() == '5'
-#
-#
-# def test_start_label(app, qtbot):
-#     app.variant_label.setText("5")
-#     qtbot.mouseClick(app.button_start, QtCore.Qt.LeftButton)
-#     assert app.text_label.text() == "5"
+@pytest.fixture
+def app(qtbot) -> main_window.Window:
+    my_app = main_window.Window()
+    qtbot.addWidget(my_app)
+    return my_app
+
+
+def test_start(app):
+    """Ловим ошибку пустого поля"""
+    app.variant_label.setText('')
+    with pytest.raises(KeyError):
+        app.button_start_click()
+
+
+def test_start_label(app, qtbot):
+    app.variant_label.setText('3')
+    qtbot.mouseClick(app.button_start, QtCore.Qt.LeftButton)
+    assert app.first_text.text() == "Вуаля, процесс закончен!\n   Что желаете сделать?"
 
 
 @pytest.mark.xfail()
@@ -63,4 +64,17 @@ def test_write_file(tmpdir):
     assert text == a_file.read()
 
 
+data = {
+    "hash": "bf67709b1216cb66038f3ae5ad2b4c066be03cbb",
+    "bins": ["220220"],
+    "last_num": "5688",
+    "hash_format": "sha1"
+}
 
+
+@pytest.mark.parametrize("cores", [7, 8, 9, 10, 12, 13, 14])
+def test_gen_num(cores):
+    """Каково было мое удивление что питон работает с 10 потоками при имеющихся 8.
+     Магия в использовании виртуальных потоков, а не физических, благодаря чему
+     можно хоть 1000 потоков запустить, все упрется во время выполнения """
+    assert gen_num.num_selection(data, cores)

@@ -1,6 +1,6 @@
 import sys
 from time import time
-import logging, logging.config
+
 import my_logger
 
 from PyQt5 import QtWidgets
@@ -28,7 +28,8 @@ class Window(QMainWindow):
             self.times.append(self.end - self.start)
             print(self.end - self.start)
             second = self.end - self.start
-            if int(second) > 80: # такая проверка для вида работы логера, цифра условная, условие выполняется на 1 варианте
+            if int(second) > 80:
+                # такая проверка для вида работы логера, цифра условная, условие выполняется на 1 варианте
                 logger.warning("The calculation is long. Check the input data")
             self.pbar.setValue(12 * i)
         self.pbar.setValue(100)
@@ -58,7 +59,6 @@ class Window(QMainWindow):
             if int(self.variant_label.text()) > 20:
                 logger.warning("The user entered a non-existent option. Repeat the request")
                 QMessageBox.about(self, "Ошибка", "Нет такого варианта")
-
                 self.variant_label.clear()
             else:
 
@@ -71,6 +71,8 @@ class Window(QMainWindow):
         else:
             QMessageBox.about(self, "Ошибка", "Пустое поле недопустимо")
             logger.warning("The user did not select an option. Repeat the request")
+            raise KeyError
+
 
     def button_restart_click(self):
         """Возвращает стартовый экран"""
