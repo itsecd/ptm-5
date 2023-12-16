@@ -151,3 +151,6 @@ def test_remove_student(mock_logger, journal: StudentJournal) -> None:
     journal.remove_student("22")
     assert len(journal.students) == 0
     mock_logger.info.assert_called_with("Client removed: 22")
+
+if __name__ == "__main__":
+    pytest.main(["-v", "-color=yes"])
