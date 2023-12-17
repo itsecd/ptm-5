@@ -59,7 +59,7 @@ def luhn_algo(settings: dict) -> bool:
     """
     Card number validation check
     :param settings:
-    :return: Validation status
+    :return: validation status
     """
     try:
         with open(settings["save_path"], "r") as f:
@@ -70,8 +70,8 @@ def luhn_algo(settings: dict) -> bool:
     length = len(number)
     if length != 16:
         logging.info("Invalid card number")
-        if data["Validation_check"] != "Unknown" or data["Validation_check"] != "Invalid":
-            data["Validation_check"] = "Invalid"
+        if data["validation_check"] != "Unknown" or data["validation_check"] != "Invalid":
+            data["validation_check"] = "Invalid"
             try:
                 with open(settings["save_path"], "w") as f:
                     json.dump(data, f)
@@ -93,7 +93,7 @@ def luhn_algo(settings: dict) -> bool:
         s = 10 - s
         if s == int(number[15]):
             logging.info("Card number is valid")
-            if data["validation_check"] != "Unknown" or data["Validation_check"] != "Valid":
+            if data["validation_check"] != "Unknown" or data["validation_check"] != "Valid":
                 data["validation_check"] = "Valid"
                 try:
                     with open(settings["save_path"], "w") as f:
@@ -103,7 +103,7 @@ def luhn_algo(settings: dict) -> bool:
             return True
         else:
             logging.info("Invalid card number")
-            if data["validation_check"] != "Unknown" or data["Validation_check"] != "Invalid":
+            if data["validation_check"] != "Unknown" or data["validation_check"] != "Invalid":
                 data["validation_check"] = "Invalid"
                 try:
                     with open(settings["save_path"], "w") as f:

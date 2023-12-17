@@ -1,5 +1,6 @@
-from BIN_and_statistic import *
-from read import *
+import logging
+from BIN_and_statistic import find_number, luhn_algo, make_statistic
+from read import read_settings
 import argparse
 logger = logging.getLogger()
 logger.setLevel('INFO')
