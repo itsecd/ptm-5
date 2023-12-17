@@ -1,8 +1,7 @@
 import pytest
 from IPython.external.qt_for_kernel import QtCore
-from _pytest import tmpdir
 
-import my_logger
+
 import main_window
 import alg_luhn, graph, read_settings, gen_num, write_result
 
