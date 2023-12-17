@@ -1,0 +1,112 @@
+2023-12-16 23:21:49,711 - WARNING - cmp_folder for test_folder/non_exixt_src and test_folder/non_exists_dst doens't complete
+2023-12-17 09:41:12,432 - WARNING - cmp_folder for test_folder/non_exixt_src and test_folder/non_exists_dst doens't complete
+2023-12-17 09:41:23,836 - WARNING - cmp_folder for test_folder/non_exixt_src and test_folder/non_exists_dst doens't complete
+2023-12-17 09:42:48,867 - WARNING - cmp_folder for test_folder/non_exixt_src and test_folder/non_exists_dst doens't complete
+2023-12-17 09:49:32,985 - WARNING - cmp_folder for test_folder/non_exixt_src and test_folder/non_exists_dst doens't complete
+2023-12-17 09:54:13,767 - WARNING - cmp_folder for test_folder/non_exixt_src and test_folder/non_exists_dst doens't complete
+2023-12-17 09:54:23,201 - WARNING - cmp_folder for test_folder/non_exixt_src and test_folder/non_exists_dst doens't complete
+2023-12-17 09:58:49,841 - WARNING - cmp_folder for test_folder/non_exixt_src and test_folder/non_exists_dst doens't complete
+2023-12-17 09:58:49,841 - WARNING - cmp_folder for test_folder/src and test_folder/dst doens't complete
+2023-12-17 10:03:56,237 - WARNING - cmp_folder for test_folder/non_exixt_src and test_folder/non_exists_dst doens't complete
+2023-12-17 10:03:56,289 - INFO - complete copy test_folder/src to test_folder/dsr without ignore_pattern
+2023-12-17 10:04:19,261 - WARNING - cmp_folder for test_folder/non_exixt_src and test_folder/non_exists_dst doens't complete
+2023-12-17 10:04:19,310 - INFO - complete copy test_folder/src to test_folder/dsr without ignore_pattern
+2023-12-17 10:04:27,937 - WARNING - cmp_folder for test_folder/non_exixt_src and test_folder/non_exists_dst doens't complete
+2023-12-17 10:04:27,987 - INFO - complete copy test_folder/src to test_folder/dsr without ignore_pattern
+2023-12-17 10:05:09,992 - WARNING - cmp_folder for test_folder/non_exixt_src and test_folder/non_exists_dst doens't complete
+2023-12-17 10:05:09,997 - INFO - complete copy test_folder/src to test_folder/dsr without ignore_pattern
+2023-12-17 10:05:18,090 - WARNING - cmp_folder for test_folder/non_exixt_src and test_folder/non_exists_dst doens't complete
+2023-12-17 10:05:18,094 - INFO - complete copy test_folder/src to test_folder/dsr without ignore_pattern
+2023-12-17 10:05:35,500 - WARNING - cmp_folder for test_folder/non_exixt_src and test_folder/non_exists_dst doens't complete
+2023-12-17 10:05:35,503 - INFO - complete copy test_folder/src to test_folder/dsr without ignore_pattern
+2023-12-17 10:20:22,970 - INFO - complete copy test_folder/src to test_folder/dst without ignore_pattern
+2023-12-17 10:21:21,279 - WARNING - cmp_folder for test_folder/non_exixt_src and test_folder/non_exists_dst doens't complete
+2023-12-17 10:21:21,283 - INFO - complete copy test_folder/src to test_folder/dst without ignore_pattern
+2023-12-17 10:26:52,047 - INFO - complete copy test_folder/src to test_folder/dst without ignore_pattern
+2023-12-17 10:27:49,080 - WARNING - cmp_folder for test_folder/non_exixt_src and test_folder/non_exixt_dst doens't complete
+2023-12-17 10:27:49,084 - INFO - complete copy test_folder/src to test_folder/dst without ignore_pattern
+2023-12-17 10:27:49,084 - WARNING - test_folder/non_exixt_src doesn't exist while full_backup
+2023-12-17 10:31:06,449 - WARNING - cmp_folder for test_folder/non_exist_src and test_folder/non_exist_dst doens't complete
+2023-12-17 10:31:06,453 - INFO - complete copy test_folder/src to test_folder/dst without ignore_pattern
+2023-12-17 10:31:06,453 - WARNING - test_folder/non_exist_src doesn't exist while full_backup
+2023-12-17 10:31:06,455 - INFO - Complete is_dir(True) for test_folder/src
+2023-12-17 10:31:06,456 - INFO - Complete is_dir(False) for test_folder/non_exist_src
+2023-12-17 10:36:12,144 - WARNING - cmp_folder for test_folder/non_exist_src and test_folder/non_exist_dst doens't complete
+2023-12-17 10:36:12,148 - INFO - complete copy test_folder/src to test_folder/dst without ignore_pattern
+2023-12-17 10:36:12,148 - WARNING - test_folder/non_exist_src doesn't exist while full_backup
+2023-12-17 10:36:12,151 - INFO - Complete is_dir(True) for test_folder/src
+2023-12-17 10:36:12,151 - INFO - Complete is_dir(False) for test_folder/non_exist_src
+2023-12-17 10:36:49,683 - INFO - complete copy test_folder/src to test_folder/dst without ignore_pattern
+2023-12-17 10:37:07,131 - WARNING - Raised exeption: [WinError 2] The system cannot find the file specified while rename
+2023-12-17 10:37:18,251 - WARNING - Raised exeption: [WinError 2] The system cannot find the file specified while rename
+2023-12-17 10:38:11,969 - INFO - Folder test_folder/src_1 renamed to test_folder/src_2
+2023-12-17 10:38:36,322 - WARNING - cmp_folder for test_folder/non_exist_src and test_folder/non_exist_dst doens't complete
+2023-12-17 10:38:36,326 - INFO - complete copy test_folder/src to test_folder/dst without ignore_pattern
+2023-12-17 10:38:36,326 - WARNING - test_folder/non_exist_src doesn't exist while full_backup
+2023-12-17 10:38:36,329 - INFO - Complete is_dir(True) for test_folder/src
+2023-12-17 10:38:36,329 - INFO - Complete is_dir(False) for test_folder/non_exist_src
+2023-12-17 10:38:36,331 - INFO - Folder test_folder/src_1 renamed to test_folder/src_2
+2023-12-17 10:41:12,720 - WARNING - cmp_folder for test_folder/non_exist_src and test_folder/non_exist_dst doens't complete
+2023-12-17 10:41:12,724 - INFO - complete copy test_folder/src to test_folder/dst without ignore_pattern
+2023-12-17 10:41:12,724 - WARNING - test_folder/non_exist_src doesn't exist while full_backup
+2023-12-17 10:41:12,726 - INFO - Complete is_dir(True) for test_folder/src
+2023-12-17 10:41:12,727 - INFO - Complete is_dir(False) for test_folder/non_exist_src
+2023-12-17 10:41:12,729 - INFO - Folder test_folder/src_1 renamed to test_folder/src_2
+2023-12-17 10:41:12,729 - WARNING - Raised exeption: [WinError 2] The system cannot find the file specified while rename
+2023-12-17 10:41:38,512 - WARNING - cmp_folder for test_folder/non_exist_src and test_folder/non_exist_dst doens't complete
+2023-12-17 10:41:38,515 - INFO - complete copy test_folder/src to test_folder/dst without ignore_pattern
+2023-12-17 10:41:38,515 - WARNING - test_folder/non_exist_src doesn't exist while full_backup
+2023-12-17 10:41:38,518 - INFO - Complete is_dir(True) for test_folder/src
+2023-12-17 10:41:38,518 - INFO - Complete is_dir(False) for test_folder/non_exist_src
+2023-12-17 10:41:38,520 - INFO - Folder test_folder/src_1 renamed to test_folder/src_2
+2023-12-17 10:41:38,521 - WARNING - Raised exeption: [WinError 2] The system cannot find the file specified while rename
+2023-12-17 10:44:13,461 - INFO - complete copy test_folder/src to test_folder/dst without ignore_pattern
+2023-12-17 10:44:38,094 - INFO - complete copy test_folder/src to test_folder/dst without ignore_pattern
+2023-12-17 10:45:06,212 - INFO - complete copy test_folder/src to test_folder/src_1 without ignore_pattern
+2023-12-17 10:46:36,294 - WARNING - cmp_folder for test_folder/non_exist_src and test_folder/non_exist_dst doens't complete
+2023-12-17 10:46:36,298 - INFO - complete copy test_folder/src to test_folder/dst without ignore_pattern
+2023-12-17 10:46:36,298 - WARNING - test_folder/non_exist_src doesn't exist while full_backup
+2023-12-17 10:46:36,300 - INFO - Complete is_dir(True) for test_folder/src
+2023-12-17 10:46:36,300 - INFO - Complete is_dir(False) for test_folder/non_exist_src
+2023-12-17 10:46:36,303 - INFO - Folder test_folder/src_1 renamed to test_folder/src_2
+2023-12-17 10:46:36,303 - WARNING - Raised exeption: [WinError 2] The system cannot find the file specified while rename
+2023-12-17 10:46:36,306 - INFO - complete copy test_folder/src to test_folder/src_1 without ignore_pattern
+2023-12-17 10:53:32,509 - WARNING - cmp_folder for test_folder/non_exist_src and test_folder/non_exist_dst doens't complete
+2023-12-17 10:53:32,512 - INFO - complete copy test_folder/src to test_folder/dst without ignore_pattern
+2023-12-17 10:53:32,512 - WARNING - test_folder/non_exist_src doesn't exist while full_backup
+2023-12-17 10:53:32,515 - INFO - Complete is_dir(True) for test_folder/src
+2023-12-17 10:53:32,515 - INFO - Complete is_dir(False) for test_folder/non_exist_src
+2023-12-17 10:53:32,518 - INFO - Folder test_folder/src_1 renamed to test_folder/src_2
+2023-12-17 10:53:32,519 - WARNING - Raised exeption: [WinError 2] The system cannot find the file specified while rename
+2023-12-17 10:53:32,522 - INFO - complete copy test_folder/src to test_folder/src_1 without ignore_pattern
+2023-12-17 10:53:32,524 - INFO - New name was created [test_folder/dst\backup_17.12.2023_10h53m32s\src]
+2023-12-17 10:54:54,803 - WARNING - cmp_folder for test_folder/non_exist_src and test_folder/non_exist_dst doens't complete
+2023-12-17 10:54:54,807 - INFO - complete copy test_folder/src to test_folder/dst without ignore_pattern
+2023-12-17 10:54:54,807 - WARNING - test_folder/non_exist_src doesn't exist while full_backup
+2023-12-17 10:54:54,810 - INFO - Complete is_dir(True) for test_folder/src
+2023-12-17 10:54:54,810 - INFO - Complete is_dir(False) for test_folder/non_exist_src
+2023-12-17 10:54:54,812 - INFO - Folder test_folder/src_1 renamed to test_folder/src_2
+2023-12-17 10:54:54,812 - WARNING - Raised exeption: [WinError 2] The system cannot find the file specified while rename
+2023-12-17 10:54:54,816 - INFO - complete copy test_folder/src to test_folder/src_1 without ignore_pattern
+2023-12-17 10:54:54,820 - INFO - Create archive - D:\Git\ptm-5\test_folder\src.zip
+2023-12-17 10:54:54,820 - INFO - Complete removing tree - test_folder/src
+2023-12-17 10:55:51,532 - WARNING - cmp_folder for test_folder/non_exist_src and test_folder/non_exist_dst doens't complete
+2023-12-17 10:55:51,536 - INFO - complete copy test_folder/src to test_folder/dst without ignore_pattern
+2023-12-17 10:55:51,536 - WARNING - test_folder/non_exist_src doesn't exist while full_backup
+2023-12-17 10:55:51,538 - INFO - Complete is_dir(True) for test_folder/src
+2023-12-17 10:55:51,539 - INFO - Complete is_dir(False) for test_folder/non_exist_src
+2023-12-17 10:55:51,541 - INFO - Folder test_folder/src_1 renamed to test_folder/src_2
+2023-12-17 10:55:51,541 - WARNING - Raised exeption: [WinError 2] The system cannot find the file specified while rename
+2023-12-17 10:55:51,545 - INFO - complete copy test_folder/src to test_folder/src_1 without ignore_pattern
+2023-12-17 10:55:51,548 - INFO - Create archive - D:\Git\ptm-5\test_folder\src.zip
+2023-12-17 10:55:51,548 - INFO - Complete removing tree - test_folder/src
+2023-12-17 10:56:31,250 - WARNING - cmp_folder for test_folder/non_exist_src and test_folder/non_exist_dst doens't complete
+2023-12-17 10:56:31,255 - INFO - complete copy test_folder/src to test_folder/dst without ignore_pattern
+2023-12-17 10:56:31,255 - WARNING - test_folder/non_exist_src doesn't exist while full_backup
+2023-12-17 10:56:31,258 - INFO - Complete is_dir(True) for test_folder/src
+2023-12-17 10:56:31,258 - INFO - Complete is_dir(False) for test_folder/non_exist_src
+2023-12-17 10:56:31,260 - INFO - Folder test_folder/src_1 renamed to test_folder/src_2
+2023-12-17 10:56:31,260 - WARNING - Raised exeption: [WinError 2] The system cannot find the file specified while rename
+2023-12-17 10:56:31,264 - INFO - complete copy test_folder/src to test_folder/src_1 without ignore_pattern
+2023-12-17 10:56:31,267 - INFO - Create archive - D:\Git\ptm-5\test_folder\src.zip
+2023-12-17 10:56:31,268 - INFO - Complete removing tree - test_folder/src
