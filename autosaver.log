@@ -110,3 +110,79 @@
 2023-12-17 10:56:31,264 - INFO - complete copy test_folder/src to test_folder/src_1 without ignore_pattern
 2023-12-17 10:56:31,267 - INFO - Create archive - D:\Git\ptm-5\test_folder\src.zip
 2023-12-17 10:56:31,268 - INFO - Complete removing tree - test_folder/src
+2023-12-17 11:06:15,820 - WARNING - cmp_folder for test_folder/non_exist_src and test_folder/non_exist_dst doens't complete
+2023-12-17 11:06:15,824 - INFO - complete copy test_folder/src to test_folder/dst without ignore_pattern
+2023-12-17 11:06:15,824 - WARNING - test_folder/non_exist_src doesn't exist while full_backup
+2023-12-17 11:06:15,826 - INFO - Complete is_dir(True) for test_folder/src
+2023-12-17 11:06:15,829 - INFO - Complete is_dir(False) for test_folder/non_exist_src
+2023-12-17 11:06:15,877 - INFO - Folder test_folder/src_1 renamed to test_folder/src_2
+2023-12-17 11:06:15,877 - WARNING - Raised exeption: [WinError 2] The system cannot find the file specified while rename
+2023-12-17 11:06:15,880 - INFO - complete copy test_folder/src to test_folder/src_1 without ignore_pattern
+2023-12-17 11:06:15,882 - INFO - New name was created [test_folder/dst\backup_17.12.2023_11h06m15s\src]
+2023-12-17 11:06:15,886 - INFO - Create archive - D:\Git\ptm-5\test_folder\src.zip
+2023-12-17 11:06:15,886 - INFO - Complete removing tree - test_folder/src
+2023-12-17 11:09:38,769 - WARNING - cmp_folder for test_folder/non_exist_src and test_folder/non_exist_dst doens't complete
+2023-12-17 11:09:38,773 - INFO - complete copy test_folder/src to test_folder/dst without ignore_pattern
+2023-12-17 11:09:38,773 - WARNING - test_folder/non_exist_src doesn't exist while full_backup
+2023-12-17 11:09:38,776 - INFO - Complete is_dir(True) for test_folder/src
+2023-12-17 11:09:38,778 - INFO - Complete is_dir(False) for test_folder/non_exist_dst
+2023-12-17 11:09:38,827 - INFO - Folder test_folder/src_1 renamed to test_folder/src_2
+2023-12-17 11:09:38,828 - WARNING - Raised exeption: [WinError 2] The system cannot find the file specified while rename
+2023-12-17 11:09:38,830 - INFO - complete copy test_folder/src to test_folder/src_1 without ignore_pattern
+2023-12-17 11:09:38,833 - INFO - New name was created [test_folder/dst\backup_17.12.2023_11h09m38s\src]
+2023-12-17 11:09:38,836 - INFO - Create archive - D:\Git\ptm-5\test_folder\src.zip
+2023-12-17 11:09:38,836 - INFO - Complete removing tree - test_folder/src
+2023-12-17 11:11:46,304 - WARNING - cmp_folder for test_folder/non_exist_src and test_folder/non_exist_dst doens't complete
+2023-12-17 11:11:46,308 - INFO - complete copy test_folder/src to test_folder/dst without ignore_pattern
+2023-12-17 11:11:46,309 - WARNING - test_folder/non_exist_src doesn't exist while full_backup
+2023-12-17 11:11:46,311 - INFO - Complete is_dir(True) for test_folder/src
+2023-12-17 11:11:46,360 - INFO - Complete is_dir(False) for test_folder/non_exist_dst
+2023-12-17 11:11:46,366 - INFO - Folder test_folder/src_1 renamed to test_folder/src_2
+2023-12-17 11:11:46,366 - WARNING - Raised exeption: [WinError 2] The system cannot find the file specified while rename
+2023-12-17 11:11:46,369 - INFO - complete copy test_folder/src to test_folder/src_1 without ignore_pattern
+2023-12-17 11:11:46,371 - INFO - New name was created [test_folder/dst\backup_17.12.2023_11h11m46s\src]
+2023-12-17 11:11:46,375 - INFO - Create archive - D:\Git\ptm-5\test_folder\src.zip
+2023-12-17 11:11:46,375 - INFO - Complete removing tree - test_folder/src
+2023-12-17 11:12:01,240 - WARNING - cmp_folder for test_folder/non_exist_src and test_folder/non_exist_dst doens't complete
+2023-12-17 11:12:01,244 - INFO - complete copy test_folder/src to test_folder/dst without ignore_pattern
+2023-12-17 11:12:01,244 - WARNING - test_folder/non_exist_src doesn't exist while full_backup
+2023-12-17 11:12:01,247 - INFO - Complete is_dir(True) for test_folder/src
+2023-12-17 11:12:01,249 - INFO - Complete is_dir(False) for test_folder/non_exist_dst
+2023-12-17 11:12:01,253 - INFO - Folder test_folder/src_1 renamed to test_folder/src_2
+2023-12-17 11:12:01,253 - WARNING - Raised exeption: [WinError 2] The system cannot find the file specified while rename
+2023-12-17 11:12:01,257 - INFO - complete copy test_folder/src to test_folder/src_1 without ignore_pattern
+2023-12-17 11:12:01,260 - INFO - New name was created [test_folder/dst\backup_17.12.2023_11h12m01s\src]
+2023-12-17 11:12:01,264 - INFO - Create archive - D:\Git\ptm-5\test_folder\src.zip
+2023-12-17 11:12:01,264 - INFO - Complete removing tree - test_folder/src
+2023-12-17 11:16:02,551 - INFO - complete copy test_folder/src to test_folder/dst without ignore_pattern
+2023-12-17 11:16:02,551 - WARNING - test_folder/non_exist_src doesn't exist while full_backup
+2023-12-17 11:16:02,554 - INFO - Complete is_dir(True) for test_folder/src
+2023-12-17 11:16:02,557 - INFO - Complete is_dir(False) for test_folder/non_exist_dst
+2023-12-17 11:16:02,559 - INFO - Folder test_folder/src_1 renamed to test_folder/src_2
+2023-12-17 11:16:02,560 - WARNING - Raised exeption: [WinError 2] The system cannot find the file specified while rename
+2023-12-17 11:16:02,563 - INFO - complete copy test_folder/src to test_folder/src_1 without ignore_pattern
+2023-12-17 11:16:02,565 - INFO - New name was created [test_folder/dst\backup_17.12.2023_11h16m02s\src]
+2023-12-17 11:16:02,568 - INFO - Create archive - D:\Git\ptm-5\test_folder\src.zip
+2023-12-17 11:16:02,568 - INFO - Complete removing tree - test_folder/src
+2023-12-17 11:16:26,534 - WARNING - cmp_folder for test_folder/non_exist_src and test_folder/non_exist_dst doens't complete
+2023-12-17 11:16:26,538 - INFO - complete copy test_folder/src to test_folder/dst without ignore_pattern
+2023-12-17 11:16:26,538 - WARNING - test_folder/non_exist_src doesn't exist while full_backup
+2023-12-17 11:16:26,540 - INFO - Complete is_dir(True) for test_folder/src
+2023-12-17 11:16:26,543 - INFO - Complete is_dir(False) for test_folder/non_exist_dst
+2023-12-17 11:16:26,546 - INFO - Folder test_folder/src_1 renamed to test_folder/src_2
+2023-12-17 11:16:26,546 - WARNING - Raised exeption: [WinError 2] The system cannot find the file specified while rename
+2023-12-17 11:16:26,549 - INFO - complete copy test_folder/src to test_folder/src_1 without ignore_pattern
+2023-12-17 11:16:26,552 - INFO - New name was created [test_folder/dst\backup_17.12.2023_11h16m26s\src]
+2023-12-17 11:16:26,555 - INFO - Create archive - D:\Git\ptm-5\test_folder\src.zip
+2023-12-17 11:16:26,556 - INFO - Complete removing tree - test_folder/src
+2023-12-17 11:18:02,934 - WARNING - cmp_folder for test_folder/non_exist_src and test_folder/non_exist_dst doens't complete
+2023-12-17 11:18:02,940 - INFO - complete copy test_folder/src to test_folder/dst without ignore_pattern
+2023-12-17 11:18:02,941 - WARNING - test_folder/non_exist_src doesn't exist while full_backup
+2023-12-17 11:18:02,943 - INFO - Complete is_dir(True) for test_folder/src
+2023-12-17 11:18:02,945 - INFO - Complete is_dir(False) for test_folder/non_exist_dst
+2023-12-17 11:18:02,948 - INFO - Folder test_folder/src_1 renamed to test_folder/src_2
+2023-12-17 11:18:02,949 - WARNING - Raised exeption: [WinError 2] The system cannot find the file specified while rename
+2023-12-17 11:18:02,952 - INFO - complete copy test_folder/src to test_folder/src_1 without ignore_pattern
+2023-12-17 11:18:02,954 - INFO - New name was created [test_folder/dst\backup_17.12.2023_11h18m02s\src]
+2023-12-17 11:18:02,958 - INFO - Create archive - D:\Git\ptm-5\test_folder\src.zip
+2023-12-17 11:18:02,958 - INFO - Complete removing tree - test_folder/src

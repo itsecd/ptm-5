@@ -7,6 +7,19 @@ import zipfile
 from utils import InterfaceFileOperation
 
 
+path_dict = {
+    "root": "test_folder",
+    "src": "test_folder/src",
+    "dst": "test_folder/dst",
+    "non_exist_src": "test_folder/non_exist_src",
+    "non_exist_dst": "test_folder/non_exist_dst",
+    "src_1": "test_folder/src_1",
+    "file": "test_folder/src/file.txt",
+    "file_copy": "test_folder/dst/file.txt",
+    "file_rec": "test_folder/src_1/file.txt",
+}
+
+
 @pytest.fixture
 def intervace() -> InterfaceFileOperation:
     """
@@ -20,17 +33,6 @@ def intervace() -> InterfaceFileOperation:
 def create_tmp_dir():
     """ fixture for craete test folder and then remove it"""
 
-    path_dict = {
-        "root": "test_folder",
-        "src": "test_folder/src",
-        "dst": "test_folder/dst",
-        "non_exist_src": "test_folder/non_exist_src",
-        "non_exist_dst": "test_folder/non_exist_dst",
-        "src_1": "test_folder/src_1",
-        "file": "test_folder/src/file.txt",
-        "file_copy": "test_folder/dst/file.txt",
-        "file_rec": "test_folder/src_1/file.txt",
-    }
     if os.path.exists(path_dict["root"]):
         shutil.rmtree(path_dict["root"])
 
@@ -45,19 +47,11 @@ def create_tmp_dir():
     shutil.rmtree(path_dict["root"])
 
 
-def test_cmp_folder(intervace: InterfaceFileOperation, create_tmp_dir):
+@pytest.mark.parametrize("src, dst, expected", [(path_dict["src_1"], path_dict["dst"], True), (path_dict["non_exist_src"], path_dict["non_exist_dst"], False), (path_dict["src"], path_dict["dst"], False)])
+def test_cmp_folder(intervace: InterfaceFileOperation, create_tmp_dir, src: str, dst: str, expected: bool):
     """test copy folder function"""
-    # equal folder
-    assert intervace.cmp_folder(
-        create_tmp_dir["src_1"], create_tmp_dir["dst"]) == True
 
-    # non exists folder
-    assert intervace.cmp_folder(
-        create_tmp_dir["non_exist_src"], create_tmp_dir["non_exist_dst"]) == False
-
-    # different folder
-    assert intervace.cmp_folder(
-        create_tmp_dir["src"], create_tmp_dir["dst"]) == False
+    assert intervace.cmp_folder(src, dst) == expected
 
 
 def test_full_backup(intervace: InterfaceFileOperation, create_tmp_dir):
@@ -72,10 +66,10 @@ def test_full_backup(intervace: InterfaceFileOperation, create_tmp_dir):
         create_tmp_dir["non_exist_src"], create_tmp_dir["dst"]) == False
 
 
-def test_is_dir(intervace: InterfaceFileOperation, create_tmp_dir):
+@pytest.mark.parametrize("name , expected", [(path_dict["src"], True), (path_dict["non_exist_dst"], False)])
+def test_is_dir(intervace: InterfaceFileOperation, create_tmp_dir, name: str, expected: bool):
     """test is dir function"""
-    assert intervace.is_dir((create_tmp_dir["src"])) == True
-    assert intervace.is_dir(create_tmp_dir["non_exist_src"]) == False
+    assert intervace.is_dir(name) == expected
 
 
 def test_rename_folder(intervace: InterfaceFileOperation, create_tmp_dir):
