@@ -89,8 +89,7 @@ class InterfaceFileOperation:
 
     def recover(self, src: str, dst: str) -> str:
         if not os.path.exists(src) and not os.path.exists(dst):
-            self.logger.info(f"Raised exeption because of src: {
-                             src} or dst: {dst} doesn't exist")
+            self.logger.info(f"Raised exeption because of src: {src} or dst: {dst} doesn't exist")
             raise f"Error: {dst} or {src} doesn't exists"
         tmp = src
         if zipfile.is_zipfile(src):
@@ -99,8 +98,7 @@ class InterfaceFileOperation:
                 shutil.unpack_archive(src, tmp)
                 self.logger.info(f"Complete unpack archive {src} for recover")
             except Exception as e:
-                self.logger.warning(f"Raised exeption: {
-                                    e} while unpack archive {src} in recover")
+                self.logger.warning(f"Raised exeption: {e} while unpack archive {src} in recover")
             try:
                 os.remove(src)
                 self.logger.info(f"complete remove {src} for recover")
@@ -124,16 +122,13 @@ class InterfaceFileOperation:
             if ignore:
                 shutil.copytree(src, dst, ignore=shutil.ignore_patterns(
                     *ignore), dirs_exist_ok=True)
-                self.logger.info(f"complete copy {src} to {
-                                 dst} with ignore_pattern")
+                self.logger.info(f"complete copy {src} to {dst} with ignore_pattern")
             else:
                 shutil.copytree(src, dst, dirs_exist_ok=True)
-                self.logger.info(f"complete copy {src} to {
-                                 dst} without ignore_pattern")
+                self.logger.info(f"complete copy {src} to {dst} without ignore_pattern")
             return True
         except Exception as e:
-            self.logger.warning(f"Raised exeption: {
-                                e} while copy {src} to {dst}")
+            self.logger.warning(f"Raised exeption: {e} while copy {src} to {dst}")
             return False
 
     def cmp_folder(self, src: str, dst: str, ignore=[]) -> bool:
@@ -149,8 +144,7 @@ class InterfaceFileOperation:
             False otherwise.
         """
         if not os.path.exists(src) or not os.path.exists(dst):
-            self.logger.warning(f"cmp_folder for {src} and {
-                                dst} doens't complete")
+            self.logger.warning(f"cmp_folder for {src} and {dst} doens't complete")
             return False
         ignore_list = []
         if not ignore:
