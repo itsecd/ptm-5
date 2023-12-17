@@ -9,14 +9,14 @@ from utils import InterfaceFileOperation
 
 path_dict = {
     "root": "test_folder",
-    "src": "test_folder/src",
-    "dst": "test_folder/dst",
-    "non_exist_src": "test_folder/non_exist_src",
-    "non_exist_dst": "test_folder/non_exist_dst",
-    "src_1": "test_folder/src_1",
-    "file": "test_folder/src/file.txt",
-    "file_copy": "test_folder/dst/file.txt",
-    "file_rec": "test_folder/src_1/file.txt",
+    "src": os.path.join("test_folder", "src"),
+    "dst": os.path.join("test_folder", "dst"),
+    "non_exist_src": os.path.join("test_folder", "non_exist_src"),
+    "non_exist_dst": os.path.join("test_folder", "non_exist_dst"),
+    "src_1": os.path.join("test_folder", "src_1"),
+    "file": os.path.join(os.path.join("test_folder", "src"), "file.txt"),
+    "file_copy": os.path.join(os.path.join("test_folder", "dst"), "file.txt"),
+    "file_rec": os.path.join(os.path.join("test_folder", "src_1"), "file.txt"),
 }
 
 
