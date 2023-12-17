@@ -31,10 +31,13 @@ def test_is_correct_guess(wordle_instance, chosen_word, user_guess, expected_res
     assert wordle_instance.is_correct_guess() == expected_result
 
 
-def test_check_word(wordle_instance):
+@pytest.mark.parametrize("chosen_word, user_guess", 
+                        [('apple', 'arple'),
+                        ('apple', 'apply')])
+def test_check_word(wordle_instance, chosen_word, user_guess):
     """check_word возвращает правильный результат и проверяет все буквы"""
-    wordle_instance.chosen_word = 'apple'
-    wordle_instance.user_guess = 'apply'
+    wordle_instance.chosen_word = chosen_word
+    wordle_instance.user_guess = user_guess
     is_correct, user_guess_validated = wordle_instance.check_word()
 
     assert not is_correct
@@ -52,7 +55,7 @@ def test_get_user_guess_valid_length(wordle_instance):
 
 def test_get_user_guess_invalid_length(wordle_instance):
     """get_user_guess - повторный запрос при неверной длине слова"""
-    with patch('rich.prompt.Prompt.ask', side_effect=['orange', 'apple']):
+    with patch('rich.prompt.Prompt.ask', side_effect=['orangee', 'apple']):
         wordle_instance.get_user_guess(remaining=3)
 
     assert wordle_instance.user_guess == 'apple'
