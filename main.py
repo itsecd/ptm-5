@@ -3,7 +3,7 @@ import logging
 from rich.console import Console
 from rich.table import Table
 from rich.live import Live
-from src.modules.wordle import Wordle
+from wordle import Wordle
 
 def setupLogger():
     logger = logging.getLogger()
