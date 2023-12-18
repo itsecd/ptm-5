@@ -66,8 +66,8 @@ def test_search_item_by_name(shop: ShopInventory) -> None:
     """
     Тест функции посика элементов по имени search_item_by_name
     """
-    shop.add_item("Коммод")
-    assert shop.search_item_by_name("Ком") == ["Коммод"]
+    shop.add_item("Комод")
+    assert shop.search_item_by_name("Ком") == ["Комод"]
 
 
 def test_clear_inventory(shop: ShopInventory) -> None:
@@ -81,7 +81,7 @@ def test_clear_inventory(shop: ShopInventory) -> None:
 
 def test_bubble_sort_inventory(shop: ShopInventory):
     """
-    Тест функции clear_inventory
+    Тест пузырьковой сортировки bubble_sort_inventory
     """
     shop.add_item("Sony Playstation")
     shop.add_item("Настольная игра")
