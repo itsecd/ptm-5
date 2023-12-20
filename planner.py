@@ -8,12 +8,12 @@ class Planner:
         """
         self.daily_planner = {}
 
-    def add_task(self, date=time.strftime('%Y-%m-%d', time.localtime()), task="Нет дел"):
+    def add_task(self, task, date=time.strftime('%Y-%m-%d', time.localtime())):
         """
         Функция для добавления дела в ежедневник
 
-        :param date: Дата выполнения дела
         :param task: Дело
+        :param date: Дата выполнения дела
         :return: None
         """
         if date in self.daily_planner:
@@ -23,12 +23,12 @@ class Planner:
 
         print(f"Добавлено дело '{task}' на {date}")
 
-    def remove_task(self, date=time.strftime('%Y-%m-%d', time.localtime()), task="Нет дел"):
+    def remove_task(self, task, date=time.strftime('%Y-%m-%d', time.localtime())):
         """
         Функция для удаления дела из ежедневника
 
-        :param date:  Дата выполнения дела
         :param task:  Дело
+        :param date:  Дата выполнения дела
         :return: None
         """
         if date in self.daily_planner and task in self.daily_planner[date]:
@@ -95,14 +95,14 @@ class Planner:
 
 def main():
     todo = Planner()
-    todo.add_task("2023-12-31", "Купить продукты")
-    todo.add_task("2023-12-31", "Лекция по ТЗИ")
-    todo.add_task("2023-12-31", "Сходить в спортзал")
-    todo.add_task("2023-12-31", "Сделать лабу по ТМП")
-    todo.add_task("2023-12-31", "Встреча с другом")
-    todo.add_task("2024-01-01", "Лечь спать вовремя")
-    todo.remove_task("2024-01-01", "Лечь спать вовремя")
-    todo.remove_task("2024-01-01", "Лечь спать вовремя")
+    todo.add_task("Купить продукты", "2023-12-31")
+    todo.add_task("Лекция по ТЗИ", "2023-12-31")
+    todo.add_task("Сходить в спортзал","2023-12-31")
+    todo.add_task("Сделать лабу по ТМП", "2023-12-31")
+    todo.add_task("Встреча с другом", "2023-12-31")
+    todo.add_task("Лечь спать вовремя", "2024-01-01")
+    todo.remove_task("Лечь спать вовремя", "2024-01-01")
+    todo.remove_task("Лечь спать вовремя", "2024-01-01")
     todo.view_tasks("2023-12-31")
     todo.view_tasks("2024-01-01")
     todo.view_all_tasks()

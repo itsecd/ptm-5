@@ -18,7 +18,7 @@ def test_add_task():
     Тест на добавление задачи в ежедневник
     """
     planner = Planner()
-    planner.add_task("test time", "test task")
+    planner.add_task("test task", "test time")
     assert len(planner.daily_planner["test time"]) == 1
 
 
@@ -27,6 +27,6 @@ def test_remove_task():
     Тест на удаление задачи из ежедневника
     """
     planner = Planner()
-    planner.add_task("test time", "test task")
-    planner.remove_task("test time")
+    planner.add_task("test task", "test time")
+    planner.remove_task("test task", "test time")
     assert len(planner.daily_planner) == 0
