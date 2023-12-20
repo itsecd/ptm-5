@@ -3,6 +3,8 @@ import torch
 from unittest.mock import patch
 from commons import kl_divergence, rand_slice_segments, get_padding, intersperse, sequence_mask, add_timing_signal_1d, cat_timing_signal_1d  
 
+#src: https://github.com/myshell-ai/OpenVoice/blob/main/commons.py
+
 @pytest.mark.parametrize("m_p, logs_p, m_q, logs_q", [
     (torch.tensor([1.0]), torch.tensor([1.0]), torch.tensor([1.0]), torch.tensor([1.0])),
     (torch.tensor([0.0]), torch.tensor([0.0]), torch.tensor([0.0]), torch.tensor([0.0])),
