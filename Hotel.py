@@ -1,7 +1,7 @@
 import csv
 import logging
 from datetime import datetime, timedelta
-
+import os
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -69,26 +69,38 @@ class Hotel:
                 logger.info(f'Changed room class for client {first_name} {last_name} to {new_room_class}')
 
     def read_from_csv(self, filename):
-        with open(filename, 'r') as file:
-            reader = csv.reader(file)
-            next(reader)
-            for row in reader:
-                first_name, last_name, check_in_date, check_out_date, room_class = row
-                check_in_date = datetime.strptime(check_in_date, '%Y-%m-%d')
-                check_out_date = datetime.strptime(check_out_date, '%Y-%m-%d')
-                client = Client(first_name, last_name, check_in_date, check_out_date, room_class)
-                self.add_client(client)
-                logger.info(f'Read client {first_name} {last_name} from CSV')
+        try:
+            with open(filename, 'r') as file:
+                reader = csv.reader(file)
+                next(reader)
+                for row in reader:
+                    first_name, last_name, check_in_date, check_out_date, room_class = row
+                    check_in_date = datetime.strptime(check_in_date, '%Y-%m-%d')
+                    check_out_date = datetime.strptime(check_out_date, '%Y-%m-%d')
+                    client = Client(first_name, last_name, check_in_date, check_out_date, room_class)
+                    self.add_client(client)
+                    logger.info(f'Read client {first_name} {last_name} from CSV')
+            return True
+        except Exception as e:
+            print(e)
+            return False
 
     def write_to_csv(self, filename):
-        with open(filename, 'w') as file:
-            writer = csv.writer(file)
-            writer.writerow(['First Name', 'Last Name', 'Check-in Date', 'Check-out Date', 'Room Class'])
-            for client in self.clients:
-                row = [client.first_name, client.last_name, client.check_in_date.strftime('%Y-%m-%d'), client.check_out_date.strftime('%Y-%m-%d'), client.room_class]
-                writer.writerow(row)
-                logger.info(f'Wrote client {client.first_name} {client.last_name} to CSV')
-
+        if not os.path.exists(filename):
+            return False
+        try:
+            with open(filename, 'w') as file:
+                writer = csv.writer(file)
+                writer.writerow(['First Name', 'Last Name', 'Check-in Date', 'Check-out Date', 'Room Class'])
+                for client in self.clients:
+                    row = [client.first_name, client.last_name, client.check_in_date.strftime('%Y-%m-%d'), client.check_out_date.strftime('%Y-%m-%d'), client.room_class]
+                    writer.writerow(row)
+                    logger.info(f'Wrote client {client.first_name} {client.last_name} to CSV')
+            return True
+        except Exception as e:
+            print(e)
+            return False
+        
     def append_client_to_csv(self, client):
         with open(self.csv_filename, 'a', newline='') as file:
             writer = csv.writer(file)
