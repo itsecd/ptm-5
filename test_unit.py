@@ -41,7 +41,17 @@ def test_append_client_to_csv():
         hotel.append_client_to_csv(client)
     mock_writer.return_value.writerow.assert_called_once_with([client.first_name, client.last_name, client.check_in_date.strftime('%Y-%m-%d'), client.check_out_date.strftime('%Y-%m-%d'), client.room_class])
 
+def test_remove_client():
+    hotel = Hotel('test.csv')
+    client1 = Client('John', 'Doe', datetime.now(), datetime.now(), 'Deluxe')
+    client2 = Client('Jane', 'Doe', datetime.now(), datetime.now(), 'Standard')
+    hotel.add_client(client1)
+    hotel.add_client(client2)
 
+    hotel.remove_client('John', 'Doe')
+
+    assert len(hotel.clients) == 1
+    assert hotel.clients[0] == client2
 
 
 
