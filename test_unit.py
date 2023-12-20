@@ -118,41 +118,6 @@ def test_change_name():
 
 
 
-# @pytest.mark.parametrize("filename", ['test_1.csv', 'test_2.csv'])
-# def test_read_from_csv(filename):
-#     hotel = Hotel('test.csv')
-
-#     client1 = Client('John', 'Doe', datetime.now(), datetime.now(), 'Deluxe')
-#     client2 = Client('Jane', 'Doe', datetime.now(), datetime.now(), 'Standard')
-#     hotel.add_client(client1)
-#     hotel.add_client(client2)
-
-#     with patch('builtins.open', new_callable=mock_open, read_data='John,Doe,2023-01-01,2023-01-10,Deluxe\nJane,Doe,2023-01-02,2023-01-11,Standard') as mock_file:
-#         hotel.read_from_csv(filename)
-#     print(hotel.clients)
-#     assert len(hotel.clients) == 2
-#     assert hotel.clients[0].first_name == 'John'
-#     assert hotel.clients[0].last_name == 'Doe'
-#     assert hotel.clients[1].first_name == 'Jane'
-#     assert hotel.clients[1].last_name == 'Doe'
-
-
-# @pytest.mark.parametrize("filename", ['test1.csv', 'test2.csv'])
-# def test_write_to_csv(filename):
-#     hotel = Hotel('test.csv')
-#     client1 = Client('John', 'Doe', datetime.now(), datetime.now(), 'Deluxe')
-#     client2 = Client('Jane', 'Doe', datetime.now(), datetime.now(), 'Standard')
-#     hotel.add_client(client1)
-#     hotel.add_client(client2)
-
-#     with patch('builtins.open', new_callable=mock_open) as mock_file:
-#         hotel.write_to_csv(filename)
-
-#     mock_file.assert_called_once_with(filename, 'w')
-#     mock_file.return_value.__enter__.return_value.writerow.assert_any_call(['First Name', 'Last Name', 'Check-in Date', 'Check-out Date', 'Room Class'])
-#     mock_file.return_value.__enter__.return_value.writerow.assert_any_call([client1.first_name, client1.last_name, client1.check_in_date.strftime('%Y-%m-%d'), client1.check_out_date.strftime('%Y-%m-%d'), client1.room_class])
-#     mock_file.return_value.__enter__.return_value.writerow.assert_any_call([client2.first_name, client2.last_name, client2.check_in_date.strftime('%Y-%m-%d'), client2.check_out_date.strftime('%Y-%m-%d'), client2.room_class])
-    
 
 if __name__ == "__main__":
     pytest.main(["-v", "-color=yes"])
