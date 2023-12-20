@@ -84,7 +84,8 @@ class Heroes:
                 self.logger.info(f"Hero with ID: {id} successfully found")
                 return True
             self.logger.error("Hero with specified ID not found")
-            raise ValueError("Hero with specified ID not found")
+            return False
+
 
     def can_survive(self, id: int) -> bool:
         """
