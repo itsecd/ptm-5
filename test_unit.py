@@ -53,10 +53,10 @@ def test_clear_inventory(shop: ShopInventory) -> None:
     shop.clear_inventory()
     assert not shop.inventory
 
-
-def test_remove_item_non_existing(shop: ShopInventory):
-    shop.remove_item("Test Item")
-    assert "Попытка удалить несуществующий товар: Test Item" 
+def test_check_item_exists(shop: ShopInventory):
+    shop.add_item("Test item")
+    assert shop.check_item_exists("Test item") == True
+    assert f"Товар 'Test item' присутствует в инвентаре."
 
 
 def test_display_inventory(shop: ShopInventory):
