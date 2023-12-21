@@ -115,7 +115,12 @@ def test_read_from_csv(hero: Heroes, filename: str) -> None:
 
     :return: None
     """
-    hero.read_from_csv(filename)
+    try:
+        hero.read_from_csv(filename)
+    except Exception as e:
+        pytest.fail(f"Exception {e} occurred when reading from {filename}")
+
+    assert True 
 
 
 @pytest.mark.parametrize("filename", ["test_heroes.csv", "nonexistent_file.csv"])
