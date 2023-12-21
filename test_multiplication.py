@@ -1,5 +1,6 @@
 import pytest
-from main import add, subtract, multiply, divide, modulo, integer_division, power, calculate_triangle_area, calculate_circle_area, calculate_rectangle_area
+from main import add, subtract, multiply, divide, modulo, integer_division, power, calculate_triangle_area, \
+    calculate_circle_area, calculate_rectangle_area
 
 
 #Тесты для базовых математических операций
