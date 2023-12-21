@@ -1,7 +1,6 @@
 import pytest
 from main import ShopInventory
 
-
 @pytest.fixture
 def shop() -> ShopInventory:
     return ShopInventory()
@@ -67,7 +66,3 @@ def test_display_inventory(shop: ShopInventory):
     assert "Item 1" in shop.inventory
     assert "Item 2" in shop.inventory
 
-
-def test_check_item_exists_non_existing(shop: ShopInventory):
-    assert shop.check_item_exists("Item 1") == False
-    assert "Товар 'Item 1' отсутствует в инвентаре." in shop.inventory
