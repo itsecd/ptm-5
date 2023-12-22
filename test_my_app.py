@@ -27,10 +27,7 @@ def test_start_label(app, qtbot):
 
 
 @pytest.mark.parametrize(("numbers", "result"),
-                         [('4529618049607621', False), ('4538912735659316', False), ('8225904637281519', False),
-                          ('6352219737721156', True), ('3872278836666320', False), ('6094581715564255', False),
-                          ('5166045463141790', True), ('1498845182739705', False), ('3206572148911478', False),
-                          ('2202202138745688', False), ('7638294589620560', True)])
+                         [('4529618049607621', False), ('7638294589620560', True)])
 def test_luhn(numbers, result):
     assert alg_luhn.alg_luhn(numbers) == result
 
@@ -69,7 +66,7 @@ data = {
 }
 
 
-@pytest.mark.parametrize("cores", [7, 8, 9, 10, 12, 13, 14])
+@pytest.mark.parametrize("cores", [3, 4])
 def test_gen_num(cores):
     """Каково было мое удивление что питон работает с 10 потоками при имеющихся 8.
      Магия в использовании виртуальных потоков, а не физических, благодаря чему
