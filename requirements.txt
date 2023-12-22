@@ -1,1 +1,7 @@
 pytest
+iniconfig
+packaging
+pluggy
+tomli
+colorama
+exceptiongroup
