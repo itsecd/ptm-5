@@ -1,5 +1,6 @@
 import itertools
 import random
+import unittest
 
 # Задача 1: Расчет вероятности выпадения определенного числа на кубике
 def probability_of_dice_roll(dice_number, target_number):
@@ -164,5 +165,21 @@ def main():
     num_dice = 2
     print("Задача 5: Вероятность выпадения суммы", target_sum, "при броске", num_dice, "кубиков =", probability_of_dice_sum(target_sum, num_dice))
 
+    class TestProbabilityFunctions(unittest.TestCase):
+        def test_probability_of_dice_roll(self):
+            self.assertEqual(probability_of_dice_roll(1, 3), 1/6)
+
+        def test_probability_of_dice_combination(self):
+            self.assertEqual(probability_of_dice_combination(7), 6/36)
+
+        def test_probability_of_coin_sequence(self):
+            self.assertAlmostEqual(probability_of_coin_sequence("HTH", 100), 0.25, delta=0.01)
+
+        def test_coin_toss_simulation(self):
+            heads, tails = coin_toss_simulation(1000)
+            self.assertAlmostEqual(heads + tails, 1.0, delta=0.05)
+
+        def test_probability_of_dice_sum(self):
+            self.assertAlmostEqual(probability_of_dice_sum(7, 2), 6/36)
 if __name__ == "__main__":
     main()
