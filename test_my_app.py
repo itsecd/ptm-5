@@ -1,5 +1,5 @@
 import pytest
-from IPython.external.qt_for_kernel import QtCore
+from PyQt5 import QtCore
 
 
 import main_window
@@ -26,14 +26,13 @@ def test_start_label(app, qtbot):
     assert app.first_text.text() == "Вуаля, процесс закончен!\n   Что желаете сделать?"
 
 
-@pytest.mark.xfail()
-@pytest.mark.parametrize("numbers", ['4529618049607621', '4538912735659316', '8225904637281519', '6352219737721156',
-                                     '3872278836666320', '6094581715564255', '5166045463141790',
-                                     '1498845182739705', '3206572148911478', '2202202138745688', '7638294589620560'])
-def test_luhn(numbers):
-    """Тест провален если последовательность не прошла проверку"""
-
-    assert alg_luhn.alg_luhn(numbers)
+@pytest.mark.parametrize(("numbers", "result"),
+                         [('4529618049607621', False), ('4538912735659316', False), ('8225904637281519', False),
+                          ('6352219737721156', True), ('3872278836666320', False), ('6094581715564255', False),
+                          ('5166045463141790', True), ('1498845182739705', False), ('3206572148911478', False),
+                          ('2202202138745688', False), ('7638294589620560', True)])
+def test_luhn(numbers, result):
+    assert alg_luhn.alg_luhn(numbers) == result
 
 
 def test_graph():
@@ -44,12 +43,11 @@ def test_graph():
     assert graph.show_plt(cores, times)
 
 
-@pytest.mark.xfail()
 def test_read_settings():
     """я ожидаю что на самом деле ошибок нет, а значит при таком раскладе тест провален.."""
 
     with pytest.raises((KeyError, FileNotFoundError)):
-        read_settings.read_json("20")
+        read_settings.read_json("21")
 
 
 def test_write_file(tmpdir):

@@ -12,6 +12,7 @@ def show_plt(cores: list, times: list) -> None:
         return False
     plt.xlabel("ядра, шт")
     plt.ylabel("Время, сек")
-    plt.show()
     return True
+    plt.show()
+
 

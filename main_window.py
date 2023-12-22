@@ -69,9 +69,10 @@ class Window(QMainWindow):
                 self.pbar.show()
                 self.progress(self.variant_label.text())
         else:
-            QMessageBox.about(self, "Ошибка", "Пустое поле недопустимо")
+            # QMessageBox.about(self, "Ошибка", "Пустое поле недопустимо")
             logger.warning("The user did not select an option. Repeat the request")
             raise KeyError
+
 
 
     def button_restart_click(self):
