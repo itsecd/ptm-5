@@ -43,7 +43,7 @@ def probability_of_coin_sequence(sequence, num_trials):
     return probability
 
 sequence_to_check = "HTH"
-print("Задача 3: Вероятность получения последовательности", sequence_to_check, "при", num_trials, "подбрасываниях монеты =", probability_of_coin_sequence(sequence_to_check, num_trials))
+#print("Задача 3: Вероятность получения последовательности", sequence_to_check,  "подбрасываниях монеты =", probability_of_coin_sequence(sequence_to_check))
 
 
 # Задача 4: Моделирование броска монеты
@@ -182,4 +182,4 @@ def main():
         def test_probability_of_dice_sum(self):
             self.assertAlmostEqual(probability_of_dice_sum(7, 2), 6/36)
 if __name__ == "__main__":
-    main()
+    unittest.main()
