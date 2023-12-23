@@ -24,18 +24,18 @@ class Calculator:
         return math.log(value, base)
 
     def sin(self, value):
-        return math.sin(value)
+        return round(math.sin(value),3)
 
     def cos(self, value):
-        return math.cos(value)
+        return round(math.cos(value),3)
 
     def tan(self, value):
-        return math.tan(value)
+        return round(math.tan(value),3)
 
     def cot(self, value):
         if math.tan(value) == 0:
             return float('inf')
-        return 1 / math.tan(value)
+        return round(1 / math.tan(value))
 
     # Примитивное численное дифференцирование
     def derivative(self, func, x, h=1e-5):
@@ -47,12 +47,50 @@ class Calculator:
         total = sum(func(a + i * h) for i in range(n))
         return total * h
 
-    # Простой метод поиска точек пересечения
-    def find_intersection(self, func1, func2, a, b, n=1000):
-        h = (b - a) / n
-        intersections = []
-        for i in range(n):
-            x = a + i * h
-            if abs(func1(x) - func2(x)) < 1e-4:
-                intersections.append(x)
-        return intersections
+    # Простой метод поиска точек пересечения линейных функция 
+    def find_intersection(self, b1, k1, b2, k2):
+        if b1 == b2:
+            if k1 == k2:
+                return "Линии совпадают"
+            else:
+                return "Линии параллельны и не пересекаются"
+    
+        x = (k2 - k1) / (b1 - b2)
+        y = b1 * x + k1
+        return (x, y)
+    def find_parabolas_intersection(self, a, b, c, d, e, f):
+        A = a - d
+        B = b - e
+        C = c - f
+
+        # Если A равно 0, уравнение становится линейным
+        if A == 0:
+            if B == 0:
+                return "Параболы не пересекаются" if C != 0 else "Параболы совпадают"
+            x = -C / B
+            y = a * x**2 + b * x + c
+            return [(x, y)]
+
+        # Вычисляем дискриминант
+        discriminant = B**2 - 4*A*C
+        if discriminant < 0:
+            return "Параболы не пересекаются"
+
+        # Вычисляем корни уравнения
+        sqrt_discriminant = math.sqrt(discriminant)
+        x1 = (-B + sqrt_discriminant) / (2*A)
+        x2 = (-B - sqrt_discriminant) / (2*A)
+
+        # Вычисляем соответствующие значения y
+        y1 = a * x1**2 + b * x1 + c
+        y2 = a * x2**2 + b * x2 + c
+        y1 = round(y1, 3)
+        y2 = round(y2, 3)
+        x1 = round(x1, 3)
+        x2 = round(x2, 3)
+        # Если дискриминант равен 0, параболы пересекаются в одной точке
+        if discriminant == 0:
+            return [(x1, y1)]
+
+        # Если дискриминант больше 0, параболы пересекаются в двух точках
+        return [(x1, y1), (x2, y2)]
