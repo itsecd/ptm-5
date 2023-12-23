@@ -2,6 +2,7 @@ import pytest
 from main import square_root, power, factorial, add, subtract, multiply, divide, \
     quadratic_formula, calculate_hypotenuse, calculate_gcd
 
+
 #Обычные тесты
 def test_square_root():
     assert square_root(16) == 4
