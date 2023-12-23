@@ -1,3 +1,5 @@
+import re
+
 class TextProcessor:
     def __init__(self, text):
         self.text = text
@@ -5,6 +7,7 @@ class TextProcessor:
 
     def _preprocess(self, text):
         # Удаляем знаки препинания и приводим к нижнему регистру
+        text = re.sub(r'[^\w\s]', '', text)
         return [word.lower() for word in text.split()]
 
     def word_frequency(self):

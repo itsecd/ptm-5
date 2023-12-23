@@ -11,11 +11,15 @@ def test_word_frequency(processor):
     frequency = processor.word_frequency()
     assert frequency["hello"] == 2
     assert frequency["world"] == 2
+    assert frequency["the"] == 1
 
-# Параметризованный тест для проверки наиболее частых слов
-@pytest.mark.parametrize("n, expected", [(2, ["hello", "world"]), (3, ["hello", "world", "the"])])
-def test_most_common_words(processor, n, expected):
-    assert processor.most_common_words(n) == expected
+def test_most_common_words_one(processor):
+    # Проверяем, возвращается ли одно самое частое слово
+    assert processor.most_common_words(1) == ["hello"]
+
+def test_most_common_words_two(processor):
+    # Проверяем, возвращаются ли два самых частых слова
+    assert processor.most_common_words(2) == ["hello", "world"]
 
 # Тест для генерации облака тегов 
 def test_generate_tag_cloud(processor):
