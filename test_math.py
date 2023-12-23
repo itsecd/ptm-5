@@ -54,7 +54,7 @@ def test_divide():
     [
         (1, -5, 6, (2, 3)),
         (2, -8, 8, (2, 2)),
-        (6, 8, 10, ("No real roots",)),
+        (6, 8, 10, ("No real roots")),
     ]
 )
 def test_quadratic_formula(a, b, c, expected):
