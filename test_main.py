@@ -61,7 +61,7 @@ def test_probability_of_dice_roll(probability_calculator, dice_number, target_nu
     result = probability_calculator.dice_roll_probability.probability_of_dice_roll(dice_number, target_number)
     assert result == pytest.approx(expected_probability, rel=1e-2)
 
-#pytest test.py
+#pytest test_main.py
 
 
 @pytest.mark.parametrize('target_sum, expected_probability', [(7, 6/36), (8, 5/36)])
@@ -69,28 +69,3 @@ def test_probability_of_dice_combination(probability_calculator, target_sum, exp
     result = probability_calculator.dice_combination_probability.probability_of_dice_combination(target_sum)
     assert result == pytest.approx(expected_probability, rel=1e-2)
 
-# Создаем стаб-объект ProbabilityCalculator
-class ProbabilityCalculatorStub(ProbabilityCalculator):
-    def probability_of_dice_combination(self, target_sum):
-        if target_sum == 7:
-            return 0.2
-        elif target_sum == 8:
-            return 0.1
-        else:
-            return 0.0
-
-@pytest.fixture
-def probability_calculator_stub():
-    return ProbabilityCalculatorStub() 
-
-def test_probability_of_dice_combination_with_stub(probability_calculator_stub):
-    # Вызываем функцию с использованием стаб-объекта
-    result = probability_calculator_stub.dice_combination_probability.probability_of_dice_combination(7)
-    # Проверяем, что результат равен ожидаемому значению
-    assert result == 0.2
-
-    result = probability_calculator_stub.dice_combination_probability.probability_of_dice_combination(8)
-    assert result == 0.1
-
-    result = probability_calculator_stub.dice_combination_probability.probability_of_dice_combination(9)
-    assert result == 0.0
