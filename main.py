@@ -11,16 +11,18 @@ def generate_random_number():
     return random.randint(1, 100)
 
 
-def calculate_square_root(num):
+def square_root(num):
     """
     Находит корень числа
     :param num: число
     :return: корень числа
     """
+    if (num < 0):
+        raise ValueError("Нельзя извлечь квадратный корень из отрицательного числа")
     return math.sqrt(num)
 
 
-def calculate_power(base, exponent): 
+def power(base, exponent): 
     """
     Возводит число в степень
     :param base: основание степени
@@ -30,7 +32,7 @@ def calculate_power(base, exponent):
     return base ** exponent
 
 
-def calculate_factorial(num):
+def factorial(num):
     """
     Находит факториал числа
     :param num: число
@@ -39,10 +41,10 @@ def calculate_factorial(num):
     if num == 0:
         return 1
     else:
-        return num * calculate_factorial(num-1)
+        return num * factorial(num-1)
 
 
-def calculate_average(numbers):
+def average(numbers):
     """
     Находит среднее арифметическое последовательности чисел
     :param numbers: последовательность чисел
@@ -76,7 +78,7 @@ def display_menu():
     print("6. Quit")
 
 
-def add_numbers(a, b):
+def add(a, b):
     """
     Находит сумму
     :param a: первое слагаемое
@@ -86,7 +88,7 @@ def add_numbers(a, b):
     return a + b
 
 
-def subtract_numbers(a, b): 
+def subtract(a, b): 
     """
     Находит разность
     :param a: уменьшаемое
@@ -96,7 +98,7 @@ def subtract_numbers(a, b):
     return a - b
 
 
-def multiply_numbers(a, b):
+def multiply(a, b):
     """
     Находит произведение
     :param a: первый множитель
@@ -106,15 +108,15 @@ def multiply_numbers(a, b):
     return a * b
 
 
-def divide_numbers(a, b):
+def divide(a, b):
     """
     Находит частное
     :param a: делимое
     :param b: делитель
     :return: частное
     """
-    if b == 0: 
-        return "Cannot divide by zero"
+    if b == 0:
+        raise ValueError("Делить на ноль нельзя")
     return a / b
 
 
@@ -136,7 +138,7 @@ def calculate_square(num):
     return num ** 2
 
 
-def calculate_percentage(number, percentage):
+def percentage(number, percentage):
     """
     Умножает число на процент
     :param number: число
@@ -146,7 +148,7 @@ def calculate_percentage(number, percentage):
     return (percentage/100) * number
 
 
-def calculate_quadratic_formula(a, b, c):
+def quadratic_formula(a, b, c):
     """
     Решает квадратное уравнение
     :param a: первый коэффициент
@@ -187,6 +189,8 @@ def calculate_hypotenuse(a, b):
     :param b: второй катет
     :return: гипотенуза
     """
+    if a <= 0 or b <= 0:
+        raise ValueError("Катет не может быть отрицательным")
     return math.sqrt(a**2 + b**2)
 
 
@@ -235,9 +239,11 @@ def calculate_gcd(x, y):
     :param y: второе число
     :return: НОД
     """ 
+    if x == 0 and y == 0:
+        raise ValueError("Нельзя найти НОД для двух нулей")
     while(y):
         x, y = y, x % y
-    return x
+    return abs(x)
 
 
 def calculate_lcm(x, y):
@@ -272,7 +278,7 @@ def calculate_standard_deviation(numbers):
     :param numbers: последовательность чисел
     :return: среднеквадратическое отклонение
     """
-    mean = calculate_average(numbers)
+    mean = average(numbers)
     variance = sum((x-mean) ** 2 for x in numbers) / len(numbers)
     return math.sqrt(variance)
 
@@ -363,42 +369,42 @@ def main():
             print(f"Random number: {random_number}")
         elif user_input == '2':
             num_to_sqrt = float(input("Enter a number to calculate square root: "))
-            result = calculate_square_root(num_to_sqrt)
+            result = square_root(num_to_sqrt)
             print(f"Square root: {result}")
         elif user_input == '3':
             base = float(input("Enter the base: "))
             exponent = float(input("Enter the exponent: "))
-            result = calculate_power(base, exponent)
+            result = power(base, exponent)
             print(f"Result of power operation: {result}")
         elif user_input == '4':
             num_for_factorial = int(input("Enter a number for factorial calculation: "))
-            result = calculate_factorial(num_for_factorial)
+            result = factorial(num_for_factorial)
             print(f"Factorial result: {result}")
         elif user_input == '5':
             numbers_to_average = [float(x)for x in input("Enter numbers separated by space: ").split()]
-            result = calculate_average(numbers_to_average)
+            result = average(numbers_to_average)
             print(f"Average: {result}")
         elif user_input == '6':
             sys.exit("Exiting the Super Calculator.")
         elif user_input == '7':
             num1 = float(input("Enter the first number: "))
             num2 = float(input("Enter the second number: "))
-            result = add_numbers(num1, num2)
+            result = add(num1, num2)
             print(f"Sum: {result}")
         elif user_input == '8':
             num1 = float(input("Enter the first number: "))
             num2 = float(input("Enter the second number: "))
-            result = subtract_numbers(num1, num2)
+            result = subtract(num1, num2)
             print(f"Difference: {result}")
         elif user_input == '9':
             num1 = float(input("Enter the first number: "))
             num2 = float(input("Enter the second number: "))
-            result = multiply_numbers(num1, num2)
+            result = multiply(num1, num2)
             print(f"Product: {result}")
         elif user_input == '10':
             num1 = float(input("Enter the numerator: "))
             num2 = float(input("Enter the denominator: "))
-            result = divide_numbers(num1, num2)
+            result = divide(num1, num2)
             print(f"Quotient: {result}")
         elif user_input == '11':
             num = float(input("Enter a number to calculate cube: "))
@@ -411,13 +417,13 @@ def main():
         elif user_input == '13':
             number = float(input("Enter the number: "))
             percentage = float(input("Enter the percentage: "))
-            result = calculate_percentage(number, percentage)
+            result = percentage(number, percentage)
             print(f"{percentage}% of {number}: {result}")
         elif user_input == '14':
             a = float(input("Enter the coefficient a: "))
             b = float(input("Enter the coefficient b: "))
             c = float(input("Enter the coefficient c: "))
-            result = calculate_quadratic_formula(a, b, c)
+            result = quadratic_formula(a, b, c)
             print(f"Quadratic formula roots: {result}")
         elif user_input == '15':
             num = float(input("Enter a number to convert to binary: "))
@@ -462,7 +468,7 @@ def main():
             print(f"LCM of {num1} and {num2}: {result}")
         elif user_input == '24':
             numbers_to_mean = [float(x) for x in input("Enter numbers separated by space: ").split()]
-            result = calculate_average(numbers_to_mean)
+            result = average(numbers_to_mean)
             print(f"Mean: {result}")
         elif user_input == '25':
             numbers_to_median = [float(x) for x in input("Enter numbers separated by space: ").split()]
@@ -544,7 +550,7 @@ def main():
             print(f"LCM of {num1} and {num2}: {result}")
         elif user_input == '42':
             numbers_to_mean = [float(x) for x in input("Enter numbers separated by space: ").split()]
-            result = calculate_average(numbers_to_mean)
+            result = average(numbers_to_mean)
             print(f"Mean: {result}")
         elif user_input == '43':
             numbers_to_median = [float(x) for x in input("Enter numbers separated by space: ").split()]
