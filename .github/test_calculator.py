@@ -1,5 +1,5 @@
 import pytest
-from main import *
+from main import add, subtract, multiply, divide, power, calculate_rectangle_area
 
 
 def test_add():
