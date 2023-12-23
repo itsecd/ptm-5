@@ -1,7 +1,5 @@
 import pytest
 import os
-import itertools
-import random
 from main import ProbabilityCalculator
 
 @pytest.fixture
