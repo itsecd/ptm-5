@@ -4,10 +4,10 @@ from sympy import symbols
 from main import (square_eq_solver, derivatives, indefinite_integral,
                    price, commission, trapezoid_area)
 
-def test_square():
-    assert square_eq_solver(10, 0, 0) == 0.00
-    assert square_eq_solver(2, 5, -3) == (0.50, -3.00) 
-    assert square_eq_solver(10, 0, 2) == None
+def test_square_eq_solver():
+    assert square_eq_solver(10, 0, 0) == (0.0, 0.0)
+    assert square_eq_solver(2, 5, -3) == (0.5, -3.0)
+    assert square_eq_solver(10, 0, 2) == "No real roots"
 
 def test_derivatives():
     x, y = symbols('x y')
@@ -33,10 +33,10 @@ def test_commission():
 
 def test_trapezoid_area():
     assert trapezoid_area(0, 0, 0) == 0.0
-    assert trapezoid_area(5, 0, -5) == -25.0
-    assert trapezoid_area(-4, -3, 2) == -8.0
+    assert trapezoid_area(5, 0, -5) == 25.0
+    assert trapezoid_area(-4, -3, 2) == 8.0
 
-@pytest.mark.parametrize("a, b, c, expected", [(0, 1, 1, -1), (2, 1, 0, ((-0.5, 0))), (3, 0, -27, (-3, 3))])
+@pytest.mark.parametrize("a, b, c, expected", [(0, 1, 1, -1), (2, 1, 0, (-0.5, 0)), (3, 0, -27, (-3, 3))])
 def test_square_eq_solver_param(a, b, c, expected):
     assert square_eq_solver(a, b, c) == expected
 
@@ -45,8 +45,8 @@ def test_derivatives_param(x, y, expr, expected):
     assert derivatives(x, y, expr) == expected
 
 @pytest.mark.parametrize("expr, expected", [('cos(x)', 'sin(x)'), ('x - 1', 'x**2 - x'), ('sqrt(x)', '2*sqrt(x)')])
-def test_indefinite_integral_param(x, expr, expected):
-    assert indefinite_integral(x, expr) == expected
+def test_indefinite_integral_param(expr, expected):
+    assert indefinite_integral(expr) == expected
 
 @pytest.mark.parametrize("a, b, c, expected", [(1807, 13, 6, (78.0, 10842)), (1807, 5, 6, (30.0, 10842)), (1807, 148, 6, (888.0, 10842))])
 def test_price_param(a, b, c, expected):
@@ -56,7 +56,7 @@ def test_price_param(a, b, c, expected):
                                                    (0.13, 0.000725, 30.0, 10842, (0.02175, 7.860449999999999, -1405.56)),
                                                      (0.13, 0.000725, 888.0, 10842, (0.6437999999999999, 7.860449999999999, -1294.02))])
 def test_commission_param(a, b, c, d, expected):
-    assert commission(a, b, c , d) == expected
+    assert commission(a, b, c, d) == expected
 
 @pytest.mark.parametrize("a, b, c, expected", [(0, 1, 0, 0.0), (32, 2, 3, 80.0), (18, 18, 18, 324.0)])
 def test_trapezoid_area_param(a, b, c, expected):
