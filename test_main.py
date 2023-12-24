@@ -1,11 +1,11 @@
 import pytest
-from sympy import symbols
+from sympy import symbols, sqrt, sin, cos
 
 from main import (square_eq_solver, derivatives, indefinite_integral,
                    price, commission, trapezoid_area)
 
 def test_square_eq_solver():
-    assert square_eq_solver(10, 0, 0) == (0.0, 0.0)
+    assert square_eq_solver(10, 0, 0) == (0.0,)
     assert square_eq_solver(2, 5, -3) == (0.5, -3.0)
     assert square_eq_solver(10, 0, 2) == "No real roots"
 
@@ -17,9 +17,9 @@ def test_derivatives():
 
 def test_indefinite_integral():
     x = symbols('x')
-    assert indefinite_integral(x, '32*x - 1') == '16*x**2 - x'
-    assert indefinite_integral(x, '1/sqrt(x)') == '2*sqrt(x)'
-    assert indefinite_integral(x, 'sin(x)') == '-cos(x)'
+    assert indefinite_integral('32*x - 1') == 16*x**2 - x
+    assert indefinite_integral('1/sqrt(x)') == 2*sqrt(x)
+    assert indefinite_integral('sin(x)') == -cos(x)
 
 def test_price():
     assert price(1807, 2, 6) == (12.0, 10842)
@@ -33,20 +33,21 @@ def test_commission():
 
 def test_trapezoid_area():
     assert trapezoid_area(0, 0, 0) == 0.0
-    assert trapezoid_area(5, 0, -5) == 25.0
-    assert trapezoid_area(-4, -3, 2) == 8.0
+    assert trapezoid_area(5, 0, -5) == -12.5
+    assert trapezoid_area(-4, -3, 2) == 2.0
 
-@pytest.mark.parametrize("a, b, c, expected", [(0, 1, 1, -1), (2, 1, 0, (-0.5, 0)), (3, 0, -27, (-3, 3))])
+@pytest.mark.parametrize("a, b, c, expected", [(0, 1, 1, (-1.0,)), (2, 1, 0, (0.0, -0.5)), (3, 0, -27, (3, -3))])
 def test_square_eq_solver_param(a, b, c, expected):
     assert square_eq_solver(a, b, c) == expected
 
-@pytest.mark.parametrize("x, y, expr, expected", [('x', 'y', '5 * x**2 - 3 * y', (32, -3)), ('x', 'y', '18 + 332', (0, 0)), ('x', 'y', '182 * x', (182, 0))])
+x, y = symbols('x y')
+@pytest.mark.parametrize("x, y, expr, expected", [('x', 'y', '5 * x**2 - 3 * y', (10 * x, -3)), ('x', 'y', '18 + 332', (0, 0)), ('x', 'y', '182 * x', (182, 0))])
 def test_derivatives_param(x, y, expr, expected):
     assert derivatives(x, y, expr) == expected
 
-@pytest.mark.parametrize("expr, expected", [('cos(x)', 'sin(x)'), ('x - 1', 'x**2 - x'), ('sqrt(x)', '2*sqrt(x)')])
+@pytest.mark.parametrize("expr, expected", [('cos(x)', 'sin(x)'), ('x - 1', 'x**2/2 - x'), ('sqrt(x)', '2*x**(3/2)/3')])
 def test_indefinite_integral_param(expr, expected):
-    assert indefinite_integral(expr) == expected
+    assert str(indefinite_integral(expr)) == expected
 
 @pytest.mark.parametrize("a, b, c, expected", [(1807, 13, 6, (78.0, 10842)), (1807, 5, 6, (30.0, 10842)), (1807, 148, 6, (888.0, 10842))])
 def test_price_param(a, b, c, expected):

@@ -1,35 +1,35 @@
 from math import sqrt
 from sympy import symbols, diff, integrate
+import sympy
 
 def square_eq_solver(a, b, c):
-   result = []
-   discriminant = b * b - 4 * a * c
-
-   if discriminant == 0:
-       result.append(-b / (2 * a))
-   elif discriminant > 0:
-       result.append((-b + sqrt(discriminant)) / (2 * a))
-       result.append((-b - sqrt(discriminant)) / (2 * a))
-
-   if len(result) > 0:
-       for index, value in enumerate(result):
-           print(f'Корень номер {index+1} равен {value:.02f}')
-   else:
-       print('Уравнение с заданными параметрами не имеет корней')
+    if a == 0:
+        if b != 0:
+            return (-c / b,)
+        else:
+            return "No real roots"
+    else:
+        discriminant = (b ** 2) - (4 * a * c)
+        if discriminant > 0:
+            root1 = (-b + discriminant ** 0.5) / (2 * a)
+            root2 = (-b - discriminant ** 0.5) / (2 * a)
+            return root1, root2
+        elif discriminant == 0:
+            root = -b / (2 * a)
+            return (root,)
+        else:
+            return "No real roots"
 
 def derivatives(x, y, expr):
-
     df_dx = diff(expr, x)
     df_dy = diff(expr, y)
-
     print("Частная производная от выражения по x:", df_dx)
     print("Частная производная от выражения по y:", df_dy)
     return df_dx, df_dy
 
-def indefinite_integral(x, expr):
-    integral_expr = integrate(expr, x)
-
-    print("Неопределенный интеграл по x:", integral_expr)
+def indefinite_integral(expr):
+    x = sympy.symbols('x')
+    return sympy.integrate(expr)
 
 def price(a, b, c):
     p1 = round(b * c, 1)
@@ -43,7 +43,7 @@ def commission(a, b, p1, p2):
     return c1, c2, c3
 
 def trapezoid_area(height, base_1, base_2):
-    area = ((base_1 + base_2) / 2) * height
+    area = ((base_1 + base_2) * height) / 2
     print('Площадь трапеции: ', area)
     return area
 
