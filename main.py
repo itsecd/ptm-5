@@ -36,7 +36,7 @@ class CarServiceList:
         '''
         for car in self.cars:
             if car['brand'] == brand and car['model'] == model:
-                car['duration_duration'] = new_duration
+                car['duration'] = new_duration
                 return True
         return False
 

@@ -19,7 +19,7 @@ def test_car_remove_successful(create_journal):
 
 def test_car_remove_unsuccessful(create_journal):
     create_journal.add_car("Mazda", "Miata", "10500", "11000", 1)
-    assert create_journal.remove_car("Ford", "Focus") == False
+    assert create_journal.remove_car("KIA", "Rio") == False
 
 def test_sort_cars_by_brand(create_journal):
     create_journal.add_car("Mazda", "Miata", "10500", "11000", 1)
@@ -33,20 +33,20 @@ def test_sort_cars_by_brand(create_journal):
     ]
 
 @pytest.mark.parametrize("old_brand, old_model, new_brand, new_model, expected", [
-    ("GAZ", "24", "VAZ", "2114", True),
+    ("Mazda", "Miata", "VAZ", "2114", True),
     ("Lada", "Vesta", "Chevrolet", "Lanos", False),
-    ("Honda", "Civic", "Hyundai", "Sonata", True),
+    ("BMW", "E320", "Hyundai", "Sonata", True),
 ])
-def test_change_brand(old_brand, old_model, new_brand, new_model, expected, create_journal):
+def test_change_car(old_brand, old_model, new_brand, new_model, expected, create_journal):
     create_journal.add_car("Mazda", "Miata", "10500", "11000", 1)
     create_journal.add_car("BMW", "E320", "5000", "8732", 4)
-    assert create_journal.change_brand(
+    assert create_journal.change_car(
         old_brand, old_model, new_brand, new_model) == expected
 
 @pytest.mark.parametrize("brand, model, new_duration, expected", [
     ("Mazda", "Miata", 5, True),
     ("Gaz", "24", 2, False),
-    ("Honda", "Civic", 12, True),
+    ("BMW", "E320", 12, True),
 ])
 def test_change_duration(brand, model, new_duration, expected, create_journal):
     create_journal.add_car("Mazda", "Miata", "10500", "11000", 1)
@@ -54,7 +54,7 @@ def test_change_duration(brand, model, new_duration, expected, create_journal):
     assert create_journal.change_duration(
         brand, model, new_duration) == expected
 
-@patch("builtins.open", new_callable=mock_open, read_data="John,Doe,2022-01-01,2022-12-31,1\nEmily,Johnson,2022-02-15,2023-02-15,121")
+@patch("builtins.open", new_callable=mock_open, read_data="Mazda,Miata,10500,11000,1\nBMW,E320,5000,8732,4")
 def test_read_from_file(mock_file, create_journal):
     create_journal.read_from_file("cars.txt")
     assert create_journal.cars == [
