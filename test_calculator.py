@@ -1,6 +1,8 @@
 import pytest
 from calculator import Calculator
 import math
+
+
 @pytest.fixture
 def calc():
     return Calculator()
@@ -29,13 +31,29 @@ def test_derivative(calc):
 def test_integral(calc):
     assert calc.integral(lambda x: x, 0, 1) == pytest.approx(0.5, 0.01)
 
-def test_find_intersection(calc):
-    assert (float(1), float(2)) == calc.find_intersection(2,0,1,1)
-    assert "Линии совпадают" == calc.find_intersection(4,6,4,6)
-    assert "Линии параллельны и не пересекаются" == calc.find_intersection(4,6,4,20)
+@pytest.mark.parametrize(
+        "a,b,c,d, expected",[
+            (2, 0, 1, 1, (float(1), float(2))),
+            (4, 6, 4, 6, "Линии совпадают"),
+            (4, 6, 4, 20, "Линии параллельны и не пересекаются")
+        ])
+def test_find_intersection(calc,a, b, c, d, expected):
+    assert calc.find_intersection(a,b,c,d) == expected
 
+@pytest.mark.parametrize(
+    "a, b, c, d, e, f, expected",
+    [
 
-def test_find_find_parabolas_intersection(calc):
-    assert [(0.618, 2.382),(-1.618, 4.618)] == calc.find_parabolas_intersection(2,1,1,1,0,2)
-    assert [(1.207, 10.7), (-0.207, 0.8)] == calc.find_parabolas_intersection(5,2,1,1,6,2)
-    assert 'Параболы не пересекаются' == calc.find_parabolas_intersection(3,5,6,-3,-5,1)
+        (1, 0, 0, 1, 0, 1, "Параболы не пересекаются"),
+
+        (1, 0, 0, 1, 0, 0, "Параболы совпадают"),
+
+        (2, 1, 1, 1, 0, 2, [(0.618, 2.382), (-1.618, 4.618)]),
+
+        (5, 2, 1, 1, 6, 2, [(1.207, 10.7), (-0.207, 0.8)]),
+
+        (5, 2, 1, 1, 6, 2, [(1.207, 10.7), (-0.207, 0.8)])
+    ]
+)
+def test_find_parabolas_intersection(calc,a, b, c, d, e, f, expected):
+    assert calc.find_parabolas_intersection(a, b, c, d, e, f) == expected
