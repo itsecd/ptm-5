@@ -3,6 +3,7 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from loguru import logger
 
+
 logger.add("music_subscription.log", format="{time} {level} {message}", level="DEBUG")
 
 

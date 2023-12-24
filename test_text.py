@@ -1,6 +1,7 @@
 import pytest
 from text import TextProcessor
 
+
 @pytest.fixture
 def processor():
     text = "Hello world! Hello universe. The world is beautiful."
@@ -12,6 +13,7 @@ def test_word_frequency(processor):
     assert frequency["hello"] == 2
     assert frequency["world"] == 2
     assert frequency["the"] == 1
+
 
 def test_most_common_words_one(processor):
     # Проверяем, возвращается ли одно самое частое слово

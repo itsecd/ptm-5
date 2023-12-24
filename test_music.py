@@ -1,9 +1,12 @@
 import pytest
 from music import MusicSubscription
 from datetime import datetime 
+
+
 @pytest.fixture
 def subscription():
     return MusicSubscription()
+
 
 def test_add_user(subscription):
     subscription.add_user("Иван", "Иванов", "01-01-2023", "01-07-2023", 6)
@@ -14,10 +17,13 @@ def test_remove_user(subscription):
     subscription.add_user("Иван", "Иванов", "01-01-2023", "01-07-2023", 6)
     subscription.remove_user("Иван", "Иванов")
     assert not subscription.check_user_exists("Иван", "Иванов")
+
+
 def test_update_user_surname(subscription):
     subscription.add_user("Иван", "Иванов", "01-01-2023", "01-07-2023", 6)
     subscription.update_user_surname("Иванов", "Петров")
     assert subscription.users[0]["surname"] == "Петров"
+
 
 def test_extend_subscription(subscription):
     subscription.add_user("Мария", "Иванова", "01-01-2023", "01-04-2023", 3)
