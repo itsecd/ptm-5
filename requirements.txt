@@ -1,9 +1,3 @@
-pytest
-iniconfig
-packaging
-pluggy
-tomli
-colorama
-exceptiongroup
 sympy
 mpmath
+pytest
