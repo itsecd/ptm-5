@@ -17,22 +17,18 @@ def test_square_eq_solver_parametrized(a, b, c, expected):
 def test_derivatives_with_mocks():
     x, y = sympy.symbols('x y')
 
-    # Создаем mock объекты для diff
     mock_diff_x = MagicMock()
     mock_diff_y = MagicMock()
 
-    # Заменяем вызовы diff на наши mock объекты
-    with patch('main.diff') as mock_diff:
+    with patch('main.sympy.diff') as mock_diff:
         mock_diff.side_effect = [mock_diff_x, mock_diff_y]
 
         expr = x**2 + y**3
         df_dx, df_dy = derivatives(x, y, expr)
 
-        # Проверяем, что mock объекты вызваны правильно
         mock_diff.assert_any_call(expr, x)
         mock_diff.assert_any_call(expr, y)
 
-        # Проверяем результаты
         assert df_dx == mock_diff_x
         assert df_dy == mock_diff_y
     
